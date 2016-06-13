@@ -111,6 +111,11 @@ public class F_Login extends javax.swing.JFrame {
                 btn_loginActionPerformed(evt);
             }
         });
+        btn_login.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btn_loginKeyPressed(evt);
+            }
+        });
 
         txt_password.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         txt_password.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -199,6 +204,23 @@ public class F_Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
+        login();
+    }//GEN-LAST:event_btn_loginActionPerformed
+
+    private void txt_usernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usernameKeyTyped
+        txt_username.setEditable(true);
+    }//GEN-LAST:event_txt_usernameKeyTyped
+
+    private void txt_passwordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyTyped
+        txt_password.setEditable(true);
+    }//GEN-LAST:event_txt_passwordKeyTyped
+
+    private void btn_loginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_loginKeyPressed
+        // TODO add your handling code here:
+        login();
+    }//GEN-LAST:event_btn_loginKeyPressed
+
+    public void login(){
         //Connection con = kon.Connect();
         
         username = txt_username.getText();
@@ -243,16 +265,7 @@ public class F_Login extends javax.swing.JFrame {
         
         txt_username.setText("");
         txt_password.setText("");
-    }//GEN-LAST:event_btn_loginActionPerformed
-
-    private void txt_usernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usernameKeyTyped
-        txt_username.setEditable(true);
-    }//GEN-LAST:event_txt_usernameKeyTyped
-
-    private void txt_passwordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyTyped
-        txt_password.setEditable(true);
-    }//GEN-LAST:event_txt_passwordKeyTyped
-
+    }
     /**
      * @param args the command line arguments
      */

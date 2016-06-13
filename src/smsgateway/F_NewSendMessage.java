@@ -5,6 +5,14 @@
  */
 package smsgateway;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User
@@ -14,12 +22,22 @@ public class F_NewSendMessage extends javax.swing.JFrame {
     /**
      * Creates new form F_NewSendMessage
      */
+    private koneksi kon;
+    private String notujuan,isipesan;
+    private String kueri;
+    private String stradmin;
+    DefaultListModel model = new DefaultListModel();
+    
+    
     public F_NewSendMessage() {
         initComponents();
         txt_notujuan.setText("");
         txt_isipesan.setText("");
         pnl_broadcast.setVisible(false);
         pnl_darurat.setVisible(false);
+        
+        kon = new koneksi();
+        jList1.setModel(model);
     }
 
     /**
@@ -48,7 +66,8 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         btn_hapus = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         pnl_broadcast = new javax.swing.JPanel();
-        txt_isipesan = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txt_isipesan = new javax.swing.JTextArea();
         check_broadcast = new javax.swing.JCheckBox();
         check_darurat = new javax.swing.JCheckBox();
         pnl_darurat = new javax.swing.JPanel();
@@ -95,6 +114,11 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         btn_kirim.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         btn_kirim.setForeground(new java.awt.Color(51, 153, 255));
         btn_kirim.setText("Kirim");
+        btn_kirim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_kirimActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -121,9 +145,19 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nomor Tujuan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 18), new java.awt.Color(51, 153, 255))); // NOI18N
 
         txt_notujuan.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txt_notujuan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_notujuanKeyTyped(evt);
+            }
+        });
 
         btn_tambah.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         btn_tambah.setText("Tambah Nomor");
+        btn_tambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tambahActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -149,21 +183,32 @@ public class F_NewSendMessage extends javax.swing.JFrame {
 
         btn_warga.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         btn_warga.setText("Tambah Nomor Warga");
+        btn_warga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_wargaActionPerformed(evt);
+            }
+        });
 
         btn_hapus.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         btn_hapus.setText("Hapus Nomor");
         btn_hapus.setPreferredSize(new java.awt.Dimension(163, 31));
+        btn_hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_hapusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_warga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_hapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btn_warga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_hapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,19 +227,23 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         pnl_broadcast.setBackground(new java.awt.Color(0, 51, 51));
         pnl_broadcast.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Broadcast", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 18), new java.awt.Color(51, 153, 255))); // NOI18N
 
+        txt_isipesan.setColumns(20);
         txt_isipesan.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txt_isipesan.setRows(5);
+        jScrollPane4.setViewportView(txt_isipesan);
 
         javax.swing.GroupLayout pnl_broadcastLayout = new javax.swing.GroupLayout(pnl_broadcast);
         pnl_broadcast.setLayout(pnl_broadcastLayout);
         pnl_broadcastLayout.setHorizontalGroup(
             pnl_broadcastLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txt_isipesan)
+            .addComponent(jScrollPane4)
         );
         pnl_broadcastLayout.setVerticalGroup(
             pnl_broadcastLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txt_isipesan, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
         );
 
+        check_broadcast.setBackground(new java.awt.Color(0, 51, 51));
         btngrp_jenispesan.add(check_broadcast);
         check_broadcast.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         check_broadcast.setForeground(new java.awt.Color(51, 153, 255));
@@ -205,6 +254,7 @@ public class F_NewSendMessage extends javax.swing.JFrame {
             }
         });
 
+        check_darurat.setBackground(new java.awt.Color(0, 51, 51));
         btngrp_jenispesan.add(check_darurat);
         check_darurat.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         check_darurat.setForeground(new java.awt.Color(51, 153, 255));
@@ -237,7 +287,7 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         pnl_darurat.setLayout(pnl_daruratLayout);
         pnl_daruratLayout.setHorizontalGroup(
             pnl_daruratLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
         );
         pnl_daruratLayout.setVerticalGroup(
             pnl_daruratLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,7 +303,7 @@ public class F_NewSendMessage extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(66, 66, 66)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,6 +381,89 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_check_daruratActionPerformed
 
+    private void btn_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahActionPerformed
+        // TODO add your handling code here:
+        if (!txt_notujuan.getText().isEmpty())
+            model.addElement(txt_notujuan.getText());
+    }//GEN-LAST:event_btn_tambahActionPerformed
+
+    private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
+        // TODO add your handling code here:
+        if(jList1.getSelectedIndex()> -1){
+            model.remove(jList1.getSelectedIndex());
+        }else {
+            JOptionPane.showMessageDialog(null,"sorot nomor terlebih dahulu");
+        }
+    }//GEN-LAST:event_btn_hapusActionPerformed
+
+    private void btn_wargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_wargaActionPerformed
+        // TODO add your handling code here:
+        kon = new koneksi();
+        try{
+            addWarga();
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_btn_wargaActionPerformed
+
+    private void btn_kirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kirimActionPerformed
+        // TODO add your handling code here:
+        try {
+            SendMessage app = new SendMessage();
+            if (check_broadcast.isSelected()){
+                try {
+                    
+                        app.doIt2(model, txt_isipesan.getText());
+                          
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }else{
+                app.doIt(txt_notujuan.getText(), txt_isipesan.getText());
+            }
+            //PANGGIL FUNGSI SENDMESSAGE
+            new F_Home().show();
+            this.dispose();
+        } catch (Exception ex) {
+           Logger.getLogger(F_History.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_kirimActionPerformed
+
+    private void txt_notujuanKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_notujuanKeyTyped
+        // TODO add your handling code here:
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_notujuanKeyTyped
+
+     public void addWarga() throws ClassNotFoundException {
+        try {
+            Statement stasql = (Statement)kon.Connect().createStatement();
+            ResultSet runkueri = stasql.executeQuery("select * from warga"); //Database pesan, field no_tujuan dan isi_pesan
+            while (runkueri.next()) {
+                model.addElement(runkueri.getString("nomor"));
+            }
+        } 
+        catch (SQLException e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+    }
+    public void simpanPesan () throws ClassNotFoundException {
+        
+        notujuan = txt_notujuan.getText(); //VARIABEL UNTUK SENDMESSAGE
+        isipesan = txt_isipesan.getText(); //VARIABEL UNTUK SENDMESSAGE
+        
+        try {
+            Statement stasql = (Statement)kon.Connect().createStatement();
+            int runkueri = stasql.executeUpdate("insert into pesan (id_pesan, no_tujuan, isi_pesan) VALUES (NULL, '"+notujuan+"','"+isipesan+"')"); //Database pesan, field no_tujuan dan isi_pesan
+//            JOptionPane.showMessageDialog(null,"Pesan berhasil disimpan");
+            stasql.close();
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -385,10 +518,11 @@ public class F_NewSendMessage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPanel pnl_broadcast;
     private javax.swing.JPanel pnl_darurat;
     private javax.swing.JTable tbl_gempa;
-    private javax.swing.JTextField txt_isipesan;
+    private javax.swing.JTextArea txt_isipesan;
     private javax.swing.JTextField txt_notujuan;
     // End of variables declaration//GEN-END:variables
 }

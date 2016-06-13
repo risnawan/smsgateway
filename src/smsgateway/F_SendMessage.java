@@ -415,7 +415,7 @@ public final class F_SendMessage extends javax.swing.JFrame {
             SendMessage app = new SendMessage();
 //            for (int i = 0; i < 100; i++){
 
-            app.doIt2("081908316892", "pesan ");
+//            app.doIt2("081908316892", "pesan ");
 //            }        
         } catch (Exception e){
             e.printStackTrace();

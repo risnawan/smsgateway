@@ -256,7 +256,7 @@ public class F_Home extends javax.swing.JFrame {
 
     private void bSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSendActionPerformed
         // TODO add your handling code here:
-        new F_SendMessage().show();
+        new F_NewSendMessage().show();
         this.dispose();
     }//GEN-LAST:event_bSendActionPerformed
 
