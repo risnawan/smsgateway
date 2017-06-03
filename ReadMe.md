@@ -42,6 +42,7 @@ Langkat 3: Copy javax.comm.properties to
   [contoh C:\Program Files\Java\jdk1.7.0_03\jre\lib ]
 ```
 > Arahkan System Environment JAVA_HOME pada path dimana jdk telah terinstal
+
 > Gunakan jdk x86
 
 
