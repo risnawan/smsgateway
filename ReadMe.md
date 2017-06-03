@@ -42,7 +42,6 @@ Langkat 3: Copy javax.comm.properties to
   [contoh C:\Program Files\Java\jdk1.7.0_03\jre\lib ]
 ```
 > Arahkan System Environment JAVA_HOME pada path dimana jdk telah terinstal
-
 > Gunakan jdk x86
 
 
@@ -55,4 +54,5 @@ Langkat 3: Copy javax.comm.properties to
 | Heraldy Septarianto | 54413051 |
 | Linda Asri Lelyandari S. | 54413990 |
 | Mohammad Risnawan Budianto | 55413639 |
+
 **Pengajar : Sunarko**
