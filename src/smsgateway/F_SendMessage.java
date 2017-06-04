@@ -27,21 +27,97 @@ public class F_SendMessage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lbl_judul = new javax.swing.JLabel();
+        lbl_notujuan = new javax.swing.JLabel();
+        txt_field1 = new javax.swing.JTextField();
+        lbl_isipesan = new javax.swing.JLabel();
+        txt_field2 = new javax.swing.JTextField();
+        btn_kirim = new javax.swing.JToggleButton();
+        btn_kembali = new javax.swing.JButton();
+        lbl_namaadmin = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lbl_judul.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lbl_judul.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_judul.setText("Buat SMS Baru");
+
+        lbl_notujuan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbl_notujuan.setText("Nomor Tujuan");
+
+        txt_field1.setText("jTextField1");
+
+        lbl_isipesan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbl_isipesan.setText("Isi Pesan");
+
+        txt_field2.setText("jTextField2");
+
+        btn_kirim.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_kirim.setText("Kirim");
+        btn_kirim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_kirimActionPerformed(evt);
+            }
+        });
+
+        btn_kembali.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_kembali.setText("Kembali");
+
+        lbl_namaadmin.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lbl_namaadmin.setText("Nama Admin");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_field2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_notujuan)
+                            .addComponent(lbl_isipesan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txt_field1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                        .addComponent(btn_kirim)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_kembali))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbl_judul, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbl_namaadmin)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_judul, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_namaadmin))
+                .addGap(26, 26, 26)
+                .addComponent(lbl_notujuan)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_field1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_kirim)
+                    .addComponent(btn_kembali))
+                .addGap(21, 21, 21)
+                .addComponent(lbl_isipesan)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_field2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_kirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kirimActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_kirimActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +155,13 @@ public class F_SendMessage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_kembali;
+    private javax.swing.JToggleButton btn_kirim;
+    private javax.swing.JLabel lbl_isipesan;
+    private javax.swing.JLabel lbl_judul;
+    private javax.swing.JLabel lbl_namaadmin;
+    private javax.swing.JLabel lbl_notujuan;
+    private javax.swing.JTextField txt_field1;
+    private javax.swing.JTextField txt_field2;
     // End of variables declaration//GEN-END:variables
 }
