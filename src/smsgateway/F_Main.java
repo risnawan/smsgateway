@@ -27,9 +27,11 @@ public class F_Main extends javax.swing.JFrame {
     private koneksi kon;
     private String no_tujuan,isi_pesan;
     private String kueri;
+    private String stradmin;
     private DefaultTableModel model;
     
     public F_Main(String namaadmin){
+        stradmin = namaadmin;
         initComponents();
         kon = new koneksi();
         
@@ -44,7 +46,7 @@ public class F_Main extends javax.swing.JFrame {
             Logger.getLogger(F_Main.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        lbl_namaadmin.setText(namaadmin);
+        lbl_namaadmin.setText(stradmin);
     }
 
     /**
@@ -148,7 +150,9 @@ public class F_Main extends javax.swing.JFrame {
     private void btn_buatpesanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buatpesanActionPerformed
         
         // Statement Buat SMS Baru
-        
+        F_SendMessage a = new F_SendMessage(stradmin);
+        a.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_buatpesanActionPerformed
 
     public void getTabelPesan () throws ClassNotFoundException {

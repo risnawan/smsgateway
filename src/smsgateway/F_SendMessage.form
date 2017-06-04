@@ -23,28 +23,25 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txt_field2" alignment="1" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lbl_notujuan" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_isipesan" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="txt_field1" min="-2" pref="140" max="-2" attributes="0"/>
+                      <Component id="txt_notujuan" min="-2" pref="140" max="-2" attributes="0"/>
                       <EmptySpace pref="83" max="32767" attributes="0"/>
                       <Component id="btn_kirim" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btn_kembali" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lbl_judul" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lbl_notujuan" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_isipesan" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                          <Component id="lbl_judul" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="lbl_namaadmin" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_namaadmin" min="-2" pref="113" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -55,22 +52,22 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lbl_judul" min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="lbl_namaadmin" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="lbl_namaadmin" max="32767" attributes="0"/>
+                  <Component id="lbl_judul" pref="38" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="lbl_notujuan" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txt_field1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_notujuan" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_kirim" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_kembali" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Component id="lbl_isipesan" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="txt_field2" pref="162" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="162" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -94,7 +91,7 @@
         <Property name="text" type="java.lang.String" value="Nomor Tujuan"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txt_field1">
+    <Component class="javax.swing.JTextField" name="txt_notujuan">
       <Properties>
         <Property name="text" type="java.lang.String" value="jTextField1"/>
       </Properties>
@@ -105,11 +102,6 @@
           <Font name="Tahoma" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Isi Pesan"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txt_field2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField2"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JToggleButton" name="btn_kirim">
@@ -130,14 +122,33 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Kembali"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_kembaliActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_namaadmin">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="18" style="1"/>
         </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Nama Admin"/>
       </Properties>
     </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="txt_isipesan">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

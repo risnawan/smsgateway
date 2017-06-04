@@ -5,17 +5,35 @@
  */
 package smsgateway;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User
  */
-public class F_SendMessage extends javax.swing.JFrame {
+public final class F_SendMessage extends javax.swing.JFrame {
 
     /**
      * Creates new form F_SendMessage
      */
-    public F_SendMessage() {
+    private koneksi kon;
+    private String notujuan,isipesan;
+    private String kueri;
+    private String stradmin;
+    
+    public F_SendMessage(String namaadmin) {
+        stradmin = namaadmin;
         initComponents();
+        kon = new koneksi();
+        
+        lbl_namaadmin.setText(stradmin);
+        txt_notujuan.setText("");
+        txt_isipesan.setText("");
     }
 
     /**
@@ -29,12 +47,13 @@ public class F_SendMessage extends javax.swing.JFrame {
 
         lbl_judul = new javax.swing.JLabel();
         lbl_notujuan = new javax.swing.JLabel();
-        txt_field1 = new javax.swing.JTextField();
+        txt_notujuan = new javax.swing.JTextField();
         lbl_isipesan = new javax.swing.JLabel();
-        txt_field2 = new javax.swing.JTextField();
         btn_kirim = new javax.swing.JToggleButton();
         btn_kembali = new javax.swing.JButton();
         lbl_namaadmin = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txt_isipesan = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,12 +64,10 @@ public class F_SendMessage extends javax.swing.JFrame {
         lbl_notujuan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbl_notujuan.setText("Nomor Tujuan");
 
-        txt_field1.setText("jTextField1");
+        txt_notujuan.setText("jTextField1");
 
         lbl_isipesan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbl_isipesan.setText("Isi Pesan");
-
-        txt_field2.setText("jTextField2");
 
         btn_kirim.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_kirim.setText("Kirim");
@@ -62,9 +79,19 @@ public class F_SendMessage extends javax.swing.JFrame {
 
         btn_kembali.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_kembali.setText("Kembali");
+        btn_kembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_kembaliActionPerformed(evt);
+            }
+        });
 
         lbl_namaadmin.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lbl_namaadmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_namaadmin.setText("Nama Admin");
+
+        txt_isipesan.setColumns(20);
+        txt_isipesan.setRows(5);
+        jScrollPane1.setViewportView(txt_isipesan);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,42 +100,40 @@ public class F_SendMessage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_field2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_notujuan)
-                            .addComponent(lbl_isipesan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txt_field1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_notujuan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                         .addComponent(btn_kirim)
                         .addGap(18, 18, 18)
                         .addComponent(btn_kembali))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbl_judul, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_notujuan)
+                            .addComponent(lbl_isipesan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_judul, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_namaadmin)))
+                        .addComponent(lbl_namaadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_judul, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_namaadmin))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbl_namaadmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbl_judul, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
                 .addGap(26, 26, 26)
                 .addComponent(lbl_notujuan)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_field1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_notujuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_kirim)
                     .addComponent(btn_kembali))
                 .addGap(21, 21, 21)
                 .addComponent(lbl_isipesan)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_field2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -117,8 +142,42 @@ public class F_SendMessage extends javax.swing.JFrame {
 
     private void btn_kirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kirimActionPerformed
         // TODO add your handling code here:
+        try {
+            
+            //PANGGIL FUNGSI SENDMESSAGE
+            
+            simpanPesan();
+            F_Main a = new F_Main(stradmin);
+            a.setVisible(true);
+            this.setVisible(false);
+        } catch (ClassNotFoundException ex) {
+           Logger.getLogger(F_Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_kirimActionPerformed
 
+    private void btn_kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kembaliActionPerformed
+        // TODO add your handling code here:
+        F_Main a = new F_Main(stradmin);
+        a.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_kembaliActionPerformed
+
+    public void simpanPesan () throws ClassNotFoundException {
+        
+        notujuan = txt_notujuan.getText(); //VARIABEL UNTUK SENDMESSAGE
+        isipesan = txt_isipesan.getText(); //VARIABEL UNTUK SENDMESSAGE
+        
+        try {
+            Statement stasql = (Statement)kon.Connect().createStatement();
+            int runkueri = stasql.executeUpdate("insert into pesan (id_pesan, no_tujuan, isi_pesan) VALUES (NULL, '"+notujuan+"','"+isipesan+"')"); //Database pesan, field no_tujuan dan isi_pesan
+            
+            JOptionPane.showMessageDialog(null,"Pesan berhasil disimpan");
+            stasql.close();
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -149,7 +208,9 @@ public class F_SendMessage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new F_SendMessage().setVisible(true);
+                //new F_SendMessage().setVisible(true);
+                F_Login b = new F_Login();
+                b.setVisible(true);
             }
         });
     }
@@ -157,11 +218,12 @@ public class F_SendMessage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_kembali;
     private javax.swing.JToggleButton btn_kirim;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_isipesan;
     private javax.swing.JLabel lbl_judul;
     private javax.swing.JLabel lbl_namaadmin;
     private javax.swing.JLabel lbl_notujuan;
-    private javax.swing.JTextField txt_field1;
-    private javax.swing.JTextField txt_field2;
+    private javax.swing.JTextArea txt_isipesan;
+    private javax.swing.JTextField txt_notujuan;
     // End of variables declaration//GEN-END:variables
 }
