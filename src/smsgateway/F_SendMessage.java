@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +27,7 @@ public final class F_SendMessage extends javax.swing.JFrame {
     private String notujuan,isipesan;
     private String kueri;
     private String stradmin;
+    DefaultListModel model = new DefaultListModel();
     
     public F_SendMessage(String namaadmin) {
         stradmin = namaadmin;
@@ -34,6 +37,7 @@ public final class F_SendMessage extends javax.swing.JFrame {
         lbl_namaadmin.setText(stradmin);
         txt_notujuan.setText("");
         txt_isipesan.setText("");
+        
     }
 
     /**
@@ -54,8 +58,19 @@ public final class F_SendMessage extends javax.swing.JFrame {
         lbl_namaadmin = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_isipesan = new javax.swing.JTextArea();
+        pBc = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        btn_hapus = new javax.swing.JButton();
+        btn_tambah = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         lbl_judul.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl_judul.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -64,7 +79,11 @@ public final class F_SendMessage extends javax.swing.JFrame {
         lbl_notujuan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbl_notujuan.setText("Nomor Tujuan");
 
-        txt_notujuan.setText("jTextField1");
+        txt_notujuan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_notujuanKeyTyped(evt);
+            }
+        });
 
         lbl_isipesan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbl_isipesan.setText("Isi Pesan");
@@ -93,48 +112,116 @@ public final class F_SendMessage extends javax.swing.JFrame {
         txt_isipesan.setRows(5);
         jScrollPane1.setViewportView(txt_isipesan);
 
+        pBc.setBorder(javax.swing.BorderFactory.createTitledBorder("Broadcast"));
+        pBc.setToolTipText("Broadcast");
+
+        jScrollPane2.setViewportView(jList1);
+
+        btn_hapus.setText("hapus nomor");
+        btn_hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_hapusActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pBcLayout = new javax.swing.GroupLayout(pBc);
+        pBc.setLayout(pBcLayout);
+        pBcLayout.setHorizontalGroup(
+            pBcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pBcLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pBcLayout.setVerticalGroup(
+            pBcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btn_hapus)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        btn_tambah.setText("tambah nomor");
+        btn_tambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tambahActionPerformed(evt);
+            }
+        });
+
+        jCheckBox1.setText("Broadcast");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(lbl_judul, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_namaadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(20, 20, 20)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lbl_notujuan)
                         .addComponent(txt_notujuan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
-                        .addComponent(btn_kirim)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_kembali))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_notujuan)
-                            .addComponent(lbl_isipesan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_judul, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_namaadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(btn_tambah))
+                    .addComponent(jCheckBox1)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pBc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(lbl_isipesan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(450, 450, 450)
+                            .addComponent(btn_kirim)
+                            .addGap(19, 19, 19)
+                            .addComponent(btn_kembali)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbl_namaadmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbl_judul, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
-                .addComponent(lbl_notujuan)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_notujuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_judul, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_namaadmin))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbl_notujuan)
+                                .addGap(3, 3, 3)
+                                .addComponent(txt_notujuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(btn_tambah))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jCheckBox1))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(pBc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_isipesan)
+                .addGap(8, 8, 8)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_kirim)
                     .addComponent(btn_kembali))
-                .addGap(21, 21, 21)
-                .addComponent(lbl_isipesan)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,7 +230,17 @@ public final class F_SendMessage extends javax.swing.JFrame {
     private void btn_kirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kirimActionPerformed
         // TODO add your handling code here:
         try {
-            
+            if (!jCheckBox1.isSelected()){
+                SendMessage app = new SendMessage();
+                try
+                {
+                        app.doIt(txt_notujuan.getText(), txt_isipesan.getText());
+                }
+                catch (Exception e)
+                {
+                        e.printStackTrace();
+                }
+            }
             //PANGGIL FUNGSI SENDMESSAGE
             
             simpanPesan();
@@ -161,6 +258,52 @@ public final class F_SendMessage extends javax.swing.JFrame {
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_kembaliActionPerformed
+
+    private void btn_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahActionPerformed
+        // TODO add your handling code here:
+        //        try{
+//            int a = Integer.parseInt(txt_notujuan.getText());
+//        }catch(Exception es){
+//            JOptionPane.showMessageDialog(null,"Masukkan hanya angka saja");
+//        }
+        jList1.setModel(model);
+        model.addElement(txt_notujuan.getText());
+
+    }//GEN-LAST:event_btn_tambahActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+        if (jCheckBox1.isSelected()){
+            pBc.setVisible(true);
+            btn_tambah.setVisible(true);
+        } else {
+            pBc.setVisible(false);
+            btn_tambah.setVisible(false);
+        }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
+        // TODO add your handling code here:
+        if(jList1.getSelectedIndex()> -1){
+            model.remove(jList1.getSelectedIndex());
+        }else {
+            JOptionPane.showMessageDialog(null,"sorot nomor terlebih dahulu");
+        }
+    }//GEN-LAST:event_btn_hapusActionPerformed
+
+    private void txt_notujuanKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_notujuanKeyTyped
+        // TODO add your handling code here:
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_notujuanKeyTyped
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        btn_tambah.setVisible(false);
+        pBc.setVisible(false);
+    }//GEN-LAST:event_formWindowOpened
 
     public void simpanPesan () throws ClassNotFoundException {
         
@@ -216,13 +359,19 @@ public final class F_SendMessage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_hapus;
     private javax.swing.JButton btn_kembali;
     private javax.swing.JToggleButton btn_kirim;
+    private javax.swing.JButton btn_tambah;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_isipesan;
     private javax.swing.JLabel lbl_judul;
     private javax.swing.JLabel lbl_namaadmin;
     private javax.swing.JLabel lbl_notujuan;
+    private javax.swing.JPanel pBc;
     private javax.swing.JTextArea txt_isipesan;
     private javax.swing.JTextField txt_notujuan;
     // End of variables declaration//GEN-END:variables
