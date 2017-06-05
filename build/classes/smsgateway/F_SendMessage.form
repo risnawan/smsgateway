@@ -33,37 +33,35 @@
               <Component id="lbl_namaadmin" min="-2" pref="113" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl_notujuan" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_notujuan" min="-2" pref="140" max="-2" attributes="0"/>
-                      <Component id="btn_tambah" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="pBc" min="-2" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lbl_notujuan" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_notujuan" min="-2" pref="140" max="-2" attributes="0"/>
+                  <Component id="btn_tambah" min="-2" max="-2" attributes="0"/>
               </Group>
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                          <Component id="lbl_isipesan" min="-2" pref="140" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="600" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="450" pref="450" max="-2" attributes="0"/>
-                          <Component id="btn_kirim" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
-                          <Component id="btn_kembali" min="-2" max="-2" attributes="0"/>
-                      </Group>
+              <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="pBc" min="-2" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                      <Component id="lbl_isipesan" min="-2" pref="140" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="600" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="450" pref="450" max="-2" attributes="0"/>
+                      <Component id="btn_kirim" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
+                      <Component id="btn_kembali" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

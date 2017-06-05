@@ -17,6 +17,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import javax.swing.JOptionPane;
 
 
 public class SendMessage
@@ -67,6 +68,13 @@ public class SendMessage
                 OutboundMessage msg = new OutboundMessage(nomor, pesan);
                 Service.getInstance().sendMessage(msg);
                 System.out.println(msg);
+                if(msg.equals(OutboundMessage.MessageStatuses.FAILED)){
+//                    JOptionPane.showMessageDialog(null,"Pesan gagal terkirim");
+                    System.out.println(nomor + " gagal terkirim");
+                }else{
+//                    JOptionPane.showMessageDialog(null,"Pesan Anda terkirim");
+                    System.out.println(nomor + " berhasil terkirim");
+                }
 //                System.in.read();
                 Service.getInstance().stopService();
         }

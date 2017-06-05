@@ -232,24 +232,23 @@ public final class F_SendMessage extends javax.swing.JFrame {
         try {
             if (!jCheckBox1.isSelected()){
                 SendMessage app = new SendMessage();
-                try
-                {
-                        app.doIt(txt_notujuan.getText(), txt_isipesan.getText());
-                }
-                catch (Exception e)
-                {
-                        e.printStackTrace();
+                try {
+                    for (int i = 0; i < model.getSize(); i++){
+                        app.doIt(String.valueOf(model.get(i)), txt_isipesan.getText());
+                        simpanPesan();
+                    }        
+                } catch (Exception e){
+                    e.printStackTrace();
                 }
             }
             //PANGGIL FUNGSI SENDMESSAGE
-            
-            simpanPesan();
             F_Main a = new F_Main(stradmin);
             a.setVisible(true);
             this.setVisible(false);
-        } catch (ClassNotFoundException ex) {
+        } catch (Exception ex) {
            Logger.getLogger(F_Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_btn_kirimActionPerformed
 
     private void btn_kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kembaliActionPerformed
@@ -267,8 +266,9 @@ public final class F_SendMessage extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(null,"Masukkan hanya angka saja");
 //        }
         jList1.setModel(model);
-        model.addElement(txt_notujuan.getText());
-
+        if (!txt_notujuan.getText().isEmpty())
+            model.addElement(txt_notujuan.getText());
+        
     }//GEN-LAST:event_btn_tambahActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -313,8 +313,7 @@ public final class F_SendMessage extends javax.swing.JFrame {
         try {
             Statement stasql = (Statement)kon.Connect().createStatement();
             int runkueri = stasql.executeUpdate("insert into pesan (id_pesan, no_tujuan, isi_pesan) VALUES (NULL, '"+notujuan+"','"+isipesan+"')"); //Database pesan, field no_tujuan dan isi_pesan
-            
-            JOptionPane.showMessageDialog(null,"Pesan berhasil disimpan");
+//            JOptionPane.showMessageDialog(null,"Pesan berhasil disimpan");
             stasql.close();
         } catch (SQLException e){
             JOptionPane.showMessageDialog(null,e.getMessage());
