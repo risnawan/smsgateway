@@ -64,16 +64,20 @@ public class F_Main extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_pesan = new javax.swing.JTable();
         btn_buatpesan = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lbl_judul.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        lbl_judul.setForeground(new java.awt.Color(51, 153, 255));
         lbl_judul.setText("SMS");
 
         lbl_namaadmin.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbl_namaadmin.setForeground(new java.awt.Color(51, 153, 255));
         lbl_namaadmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_namaadmin.setText("Nama Admin");
 
+        btn_logout.setForeground(new java.awt.Color(51, 153, 255));
         btn_logout.setText("Log Out");
         btn_logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +85,7 @@ public class F_Main extends javax.swing.JFrame {
             }
         });
 
+        tbl_pesan.setForeground(new java.awt.Color(51, 153, 255));
         tbl_pesan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -92,15 +97,31 @@ public class F_Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_pesan.setSelectionBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(tbl_pesan);
 
         btn_buatpesan.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btn_buatpesan.setForeground(new java.awt.Color(51, 153, 255));
         btn_buatpesan.setText("SMS Baru");
         btn_buatpesan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_buatpesanActionPerformed(evt);
             }
         });
+
+        jPanel1.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel1.setForeground(new java.awt.Color(0, 51, 51));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 538, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 646, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,6 +139,8 @@ public class F_Main extends javax.swing.JFrame {
                             .addComponent(lbl_namaadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(43, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,6 +156,8 @@ public class F_Main extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btn_buatpesan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(42, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -211,6 +236,7 @@ public class F_Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_buatpesan;
     private javax.swing.JButton btn_logout;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_judul;
     private javax.swing.JLabel lbl_namaadmin;

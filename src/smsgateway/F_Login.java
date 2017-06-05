@@ -45,12 +45,15 @@ public class F_Login extends javax.swing.JFrame {
         lbl_judul = new javax.swing.JLabel();
         txt_password = new javax.swing.JPasswordField();
         btn_close = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 51, 51));
         setLocationByPlatform(true);
         setResizable(false);
 
         txt_username.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        txt_username.setForeground(new java.awt.Color(51, 153, 255));
         txt_username.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_usernameKeyTyped(evt);
@@ -58,12 +61,15 @@ public class F_Login extends javax.swing.JFrame {
         });
 
         lbl_username.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        lbl_username.setForeground(new java.awt.Color(51, 153, 255));
         lbl_username.setText("Username                     :");
 
         lbl_password.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        lbl_password.setForeground(new java.awt.Color(51, 153, 255));
         lbl_password.setText("Password                     :");
 
         btn_login.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btn_login.setForeground(new java.awt.Color(51, 153, 255));
         btn_login.setText("Login");
         btn_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,10 +78,12 @@ public class F_Login extends javax.swing.JFrame {
         });
 
         lbl_judul.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        lbl_judul.setForeground(new java.awt.Color(51, 153, 255));
         lbl_judul.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_judul.setText("SMS");
 
         txt_password.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        txt_password.setForeground(new java.awt.Color(51, 153, 255));
         txt_password.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_passwordKeyTyped(evt);
@@ -83,12 +91,27 @@ public class F_Login extends javax.swing.JFrame {
         });
 
         btn_close.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btn_close.setForeground(new java.awt.Color(51, 153, 255));
         btn_close.setText("Close");
         btn_close.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_closeActionPerformed(evt);
             }
         });
+
+        jPanel1.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 483, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 401, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,6 +134,8 @@ public class F_Login extends javax.swing.JFrame {
                             .addComponent(txt_username, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txt_password))))
                 .addGap(50, 50, 50))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,6 +155,8 @@ public class F_Login extends javax.swing.JFrame {
                     .addComponent(btn_login, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_close, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -233,6 +260,7 @@ public class F_Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_close;
     private javax.swing.JButton btn_login;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_judul;
     private javax.swing.JLabel lbl_password;
     private javax.swing.JLabel lbl_username;

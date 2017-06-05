@@ -60,10 +60,11 @@ public final class F_SendMessage extends javax.swing.JFrame {
         txt_isipesan = new javax.swing.JTextArea();
         pBc = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jList1 = new javax.swing.JList<String>();
         btn_hapus = new javax.swing.JButton();
         btn_tambah = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -73,12 +74,15 @@ public final class F_SendMessage extends javax.swing.JFrame {
         });
 
         lbl_judul.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lbl_judul.setForeground(new java.awt.Color(51, 153, 255));
         lbl_judul.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_judul.setText("Buat SMS Baru");
 
         lbl_notujuan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbl_notujuan.setForeground(new java.awt.Color(51, 153, 255));
         lbl_notujuan.setText("Nomor Tujuan");
 
+        txt_notujuan.setForeground(new java.awt.Color(51, 153, 255));
         txt_notujuan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_notujuanKeyTyped(evt);
@@ -86,9 +90,11 @@ public final class F_SendMessage extends javax.swing.JFrame {
         });
 
         lbl_isipesan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbl_isipesan.setForeground(new java.awt.Color(51, 153, 255));
         lbl_isipesan.setText("Isi Pesan");
 
         btn_kirim.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_kirim.setForeground(new java.awt.Color(51, 153, 255));
         btn_kirim.setText("Kirim");
         btn_kirim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +103,7 @@ public final class F_SendMessage extends javax.swing.JFrame {
         });
 
         btn_kembali.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_kembali.setForeground(new java.awt.Color(51, 153, 255));
         btn_kembali.setText("Kembali");
         btn_kembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,18 +112,24 @@ public final class F_SendMessage extends javax.swing.JFrame {
         });
 
         lbl_namaadmin.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lbl_namaadmin.setForeground(new java.awt.Color(51, 153, 255));
         lbl_namaadmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_namaadmin.setText("Nama Admin");
 
         txt_isipesan.setColumns(20);
+        txt_isipesan.setForeground(new java.awt.Color(51, 153, 255));
         txt_isipesan.setRows(5);
         jScrollPane1.setViewportView(txt_isipesan);
 
+        pBc.setBackground(new java.awt.Color(0, 51, 51));
         pBc.setBorder(javax.swing.BorderFactory.createTitledBorder("Broadcast"));
+        pBc.setForeground(new java.awt.Color(51, 153, 255));
         pBc.setToolTipText("Broadcast");
 
+        jList1.setForeground(new java.awt.Color(51, 153, 255));
         jScrollPane2.setViewportView(jList1);
 
+        btn_hapus.setForeground(new java.awt.Color(51, 153, 255));
         btn_hapus.setText("hapus nomor");
         btn_hapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,6 +154,7 @@ public final class F_SendMessage extends javax.swing.JFrame {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        btn_tambah.setForeground(new java.awt.Color(51, 153, 255));
         btn_tambah.setText("tambah nomor");
         btn_tambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,12 +162,26 @@ public final class F_SendMessage extends javax.swing.JFrame {
             }
         });
 
+        jCheckBox1.setForeground(new java.awt.Color(51, 153, 255));
         jCheckBox1.setText("Broadcast");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox1ActionPerformed(evt);
             }
         });
+
+        jPanel1.setBackground(new java.awt.Color(0, 51, 51));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 610, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 489, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -165,30 +193,31 @@ public final class F_SendMessage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbl_namaadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_notujuan)
+                    .addComponent(txt_notujuan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_tambah))
+                .addComponent(jCheckBox1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pBc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(lbl_isipesan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(450, 450, 450)
+                        .addComponent(btn_kirim)
+                        .addGap(19, 19, 19)
+                        .addComponent(btn_kembali)))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(20, 20, 20)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbl_notujuan)
-                        .addComponent(txt_notujuan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_tambah))
-                    .addComponent(jCheckBox1)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pBc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(lbl_isipesan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(450, 450, 450)
-                            .addComponent(btn_kirim)
-                            .addGap(19, 19, 19)
-                            .addComponent(btn_kembali)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,6 +251,8 @@ public final class F_SendMessage extends javax.swing.JFrame {
                     .addComponent(btn_kirim)
                     .addComponent(btn_kembali))
                 .addContainerGap(13, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -364,6 +395,7 @@ public final class F_SendMessage extends javax.swing.JFrame {
     private javax.swing.JButton btn_tambah;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JList<String> jList1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_isipesan;
