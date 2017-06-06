@@ -68,15 +68,17 @@ public class SendMessage
                 OutboundMessage msg = new OutboundMessage(nomor, pesan);
                 Service.getInstance().sendMessage(msg);
                 System.out.println(msg);
-                if(msg.equals(OutboundMessage.MessageStatuses.FAILED)){
+                if(String.valueOf(msg.getMessageStatus()).equals("FAILED")){
 //                    JOptionPane.showMessageDialog(null,"Pesan gagal terkirim");
                     System.out.println(nomor + " gagal terkirim");
-                }else{
+                }else if(String.valueOf(msg.getMessageStatus()).equals("SENT")){
 //                    JOptionPane.showMessageDialog(null,"Pesan Anda terkirim");
                     System.out.println(nomor + " berhasil terkirim");
                 }
+                System.out.print(msg.getMessageStatus());
 //                System.in.read();
                 Service.getInstance().stopService();
+                Service.getInstance().removeGateway(gateway);
         }
 
         public class OutboundNotification implements IOutboundMessageNotification

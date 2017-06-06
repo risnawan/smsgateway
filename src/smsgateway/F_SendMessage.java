@@ -261,8 +261,8 @@ public final class F_SendMessage extends javax.swing.JFrame {
     private void btn_kirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kirimActionPerformed
         // TODO add your handling code here:
         try {
-            if (!jCheckBox1.isSelected()){
-                SendMessage app = new SendMessage();
+            SendMessage app = new SendMessage();
+            if (jCheckBox1.isSelected()){
                 try {
                     for (int i = 0; i < model.getSize(); i++){
                         app.doIt(String.valueOf(model.get(i)), txt_isipesan.getText());
@@ -271,6 +271,8 @@ public final class F_SendMessage extends javax.swing.JFrame {
                 } catch (Exception e){
                     e.printStackTrace();
                 }
+            }else{
+                app.doIt(txt_notujuan.getText(), txt_isipesan.getText());
             }
             //PANGGIL FUNGSI SENDMESSAGE
             F_Main a = new F_Main(stradmin);
