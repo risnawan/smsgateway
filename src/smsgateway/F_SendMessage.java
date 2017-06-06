@@ -122,7 +122,7 @@ public final class F_SendMessage extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txt_isipesan);
 
         pBc.setBackground(new java.awt.Color(0, 51, 51));
-        pBc.setBorder(javax.swing.BorderFactory.createTitledBorder("Broadcast"));
+        pBc.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Broadcast", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(51, 153, 255))); // NOI18N
         pBc.setForeground(new java.awt.Color(51, 153, 255));
         pBc.setToolTipText("Broadcast");
 

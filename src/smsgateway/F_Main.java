@@ -85,6 +85,7 @@ public class F_Main extends javax.swing.JFrame {
             }
         });
 
+        tbl_pesan.setBackground(new java.awt.Color(204, 204, 204));
         tbl_pesan.setForeground(new java.awt.Color(51, 153, 255));
         tbl_pesan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,6 +99,7 @@ public class F_Main extends javax.swing.JFrame {
             }
         ));
         tbl_pesan.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        tbl_pesan.setSelectionForeground(new java.awt.Color(51, 153, 255));
         jScrollPane1.setViewportView(tbl_pesan);
 
         btn_buatpesan.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
