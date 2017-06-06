@@ -16,67 +16,62 @@ import org.smslib.modem.SerialModemGateway;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 import javax.swing.JOptionPane;
 
 
 public class SendMessage
 {
+    private koneksi kon;
+    private String sta;
+//    private String kueri;
+    
         public void doIt(String nomor, String pesan) throws Exception
         {
-//            Properties prop = new Properties();
-//            InputStream input = null;
-//
-//            try{
-//                input = new FileInputStream("settingmodem.properties");
-//		// load a properties file
-//		prop.load(input);
-//		// get the property value and print it out
-//		System.out.println(prop.getProperty("comPort"));
-//		System.out.println(prop.getProperty("baudRate"));
-//            }catch (IOException ex) {
-//		ex.printStackTrace();
-//            }finally {
-//                if (input != null) {
-//                    try {
-//                        input.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
+            Properties prop = new Properties();
+            InputStream input = null;
+            try {
+		input = new FileInputStream("src/settingmodem.properties");
+		// load a properties file
+		prop.load(input);
+		// get the property value and print it out
+		System.out.println(prop.getProperty("baudRate"));
+		System.out.println(prop.getProperty("comPort"));
+		System.out.println(prop.getProperty("model")); 
+        } catch (IOException ex) {
+		ex.printStackTrace();
+	} finally {
+		if (input != null) {
+			try {
+				input.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
             
             OutboundNotification outboundNotification = new OutboundNotification();
-//                System.out.println("Example: Send message from a serial gsm modem.");
-//                System.out.println(Library.getLibraryDescription());
-//                System.out.println("Version: " + Library.getLibraryVersion());
-                SerialModemGateway gateway = new SerialModemGateway("", "COM9", 9600, "", "AirCard 312U");
+                SerialModemGateway gateway = new SerialModemGateway("", prop.getProperty("comPort", "com9"), Integer.parseInt(prop.getProperty("baudRate", "9600")), "", prop.getProperty("model", "AirCard 312U"));
                 gateway.setInbound(true);
                 gateway.setOutbound(true);
                 Service.getInstance().setOutboundMessageNotification(outboundNotification);
                 Service.getInstance().addGateway(gateway);
                 Service.getInstance().startService();
-//                System.out.println();
-//                System.out.println("Modem Information:");
-//                System.out.println("  Manufacturer: " + gateway.getManufacturer());
-//                System.out.println("  Model: " + gateway.getModel());
-//                System.out.println("  Serial No: " + gateway.getSerialNo());
-//                System.out.println("  SIM IMSI: " + gateway.getImsi());
-//                System.out.println("  Signal Level: " + gateway.getSignalLevel() + " dBm");
-//                System.out.println("  Battery Level: " + gateway.getBatteryLevel() + "%");
-//                System.out.println();
                 OutboundMessage msg = new OutboundMessage(nomor, pesan);
                 Service.getInstance().sendMessage(msg);
                 System.out.println(msg);
                 if(String.valueOf(msg.getMessageStatus()).equals("FAILED")){
-//                    JOptionPane.showMessageDialog(null,"Pesan gagal terkirim");
+                    sta = "tidak terkirim";
                     System.out.println(nomor + " gagal terkirim");
+                    
                 }else if(String.valueOf(msg.getMessageStatus()).equals("SENT")){
-//                    JOptionPane.showMessageDialog(null,"Pesan Anda terkirim");
                     System.out.println(nomor + " berhasil terkirim");
+                    sta = "terkirim";
                 }
-                System.out.print(msg.getMessageStatus());
-//                System.in.read();
+                simpanPesan(nomor, pesan, sta);
+//                System.out.print(msg.getMessageStatus());
                 Service.getInstance().stopService();
                 Service.getInstance().removeGateway(gateway);
         }
@@ -89,4 +84,19 @@ public class SendMessage
                         System.out.println(msg);
                 }
         }
+        
+        public void simpanPesan (String nomor, String pesan, String status) throws ClassNotFoundException {
+        kon = new koneksi();
+//        notujuan = txt_notujuan.getText(); //VARIABEL UNTUK SENDMESSAGE
+//        isipesan = txt_isipesan.getText(); //VARIABEL UNTUK SENDMESSAGE
+        
+        try {
+            Statement stasql = (Statement)kon.Connect().createStatement();
+            int runkueri = stasql.executeUpdate("insert into pesan (id_pesan, no_tujuan, isi_pesan, waktu, status) VALUES (NULL, '"+nomor+"','"+pesan+"', now(),'"+status+"')"); //Database pesan, field no_tujuan dan isi_pesan
+//            JOptionPane.showMessageDialog(null,"Pesan berhasil disimpan");
+            stasql.close();
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+    }
 }

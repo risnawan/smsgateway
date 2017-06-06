@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author User
  */
-public class F_Main extends javax.swing.JFrame {
+public class F_History extends javax.swing.JFrame {
 
     /**
      * Creates new form F_Main
@@ -27,26 +27,28 @@ public class F_Main extends javax.swing.JFrame {
     private koneksi kon;
     private String no_tujuan,isi_pesan;
     private String kueri;
-    private String stradmin;
+//    private String stradmin;
     private DefaultTableModel model;
     
-    public F_Main(String namaadmin){
-        stradmin = namaadmin;
+    public F_History(){
+//        stradmin = namaadmin;
         initComponents();
         kon = new koneksi();
         
         model = new DefaultTableModel ();
         tbl_pesan.setModel(model);
+        model.addColumn("Waktu");
         model.addColumn("Nomor Tujuan");
-        model.addColumn("Isi Pesan");
+        model.addColumn("Pesan");
+        model.addColumn("Status");
         
         try {
             getTabelPesan();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(F_Main.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(F_History.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        lbl_namaadmin.setText(stradmin);
+        lbl_namaadmin.setText(new admin().admin);
     }
 
     /**
@@ -60,10 +62,9 @@ public class F_Main extends javax.swing.JFrame {
 
         lbl_judul = new javax.swing.JLabel();
         lbl_namaadmin = new javax.swing.JLabel();
-        btn_logout = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_pesan = new javax.swing.JTable();
-        btn_buatpesan = new javax.swing.JButton();
+        btn_kembali = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -76,14 +77,6 @@ public class F_Main extends javax.swing.JFrame {
         lbl_namaadmin.setForeground(new java.awt.Color(51, 153, 255));
         lbl_namaadmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_namaadmin.setText("Nama Admin");
-
-        btn_logout.setForeground(new java.awt.Color(51, 153, 255));
-        btn_logout.setText("Log Out");
-        btn_logout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_logoutActionPerformed(evt);
-            }
-        });
 
         tbl_pesan.setBackground(new java.awt.Color(204, 204, 204));
         tbl_pesan.setForeground(new java.awt.Color(51, 153, 255));
@@ -102,12 +95,12 @@ public class F_Main extends javax.swing.JFrame {
         tbl_pesan.setSelectionForeground(new java.awt.Color(51, 153, 255));
         jScrollPane1.setViewportView(tbl_pesan);
 
-        btn_buatpesan.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        btn_buatpesan.setForeground(new java.awt.Color(51, 153, 255));
-        btn_buatpesan.setText("SMS Baru");
-        btn_buatpesan.addActionListener(new java.awt.event.ActionListener() {
+        btn_kembali.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btn_kembali.setForeground(new java.awt.Color(51, 153, 255));
+        btn_kembali.setText("Kembali");
+        btn_kembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_buatpesanActionPerformed(evt);
+                btn_kembaliActionPerformed(evt);
             }
         });
 
@@ -132,13 +125,11 @@ public class F_Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_buatpesan, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl_judul, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbl_namaadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbl_namaadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(43, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,13 +142,11 @@ public class F_Main extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_judul, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_namaadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_logout)
-                .addGap(18, 18, 18)
+                .addGap(47, 47, 47)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_buatpesan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addComponent(btn_kembali)
+                .addContainerGap(52, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -165,31 +154,23 @@ public class F_Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
-        
-        // Statement LOG OUT
-        F_Login b = new F_Login();
-        b.setVisible(true);
-        this.setVisible(false);
-        
-    }//GEN-LAST:event_btn_logoutActionPerformed
-
-    private void btn_buatpesanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buatpesanActionPerformed
+    private void btn_kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kembaliActionPerformed
         
         // Statement Buat SMS Baru
-        F_SendMessage a = new F_SendMessage(stradmin);
-        a.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btn_buatpesanActionPerformed
+        new F_Home().show();
+        this.dispose();
+    }//GEN-LAST:event_btn_kembaliActionPerformed
 
     public void getTabelPesan () throws ClassNotFoundException {
         try {
             Statement stasql = (Statement)kon.Connect().createStatement();
             ResultSet runkueri = stasql.executeQuery("select * from pesan"); //Database pesan, field no_tujuan dan isi_pesan
             while (runkueri.next()) {
-                Object[] obj = new Object[2];
-                obj[0] = runkueri.getString("no_tujuan");
-                obj[1] = runkueri.getString("isi_pesan");
+                Object[] obj = new Object[4];
+                obj[0] = runkueri.getString("waktu");
+                obj[1] = runkueri.getString("no_tujuan");
+                obj[2] = runkueri.getString("isi_pesan");
+                obj[3] = runkueri.getString("status");
                 model.addRow(obj);
             }
         } 
@@ -215,14 +196,15 @@ public class F_Main extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(F_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(F_History.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(F_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(F_History.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(F_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(F_History.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(F_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(F_History.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -236,8 +218,7 @@ public class F_Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_buatpesan;
-    private javax.swing.JButton btn_logout;
+    private javax.swing.JButton btn_kembali;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_judul;

@@ -29,8 +29,9 @@ public final class F_SendMessage extends javax.swing.JFrame {
     private String stradmin;
     DefaultListModel model = new DefaultListModel();
     
-    public F_SendMessage(String namaadmin) {
-        stradmin = namaadmin;
+    public F_SendMessage() {
+//        stradmin = namaadmin;
+        stradmin = new admin().admin;
         initComponents();
         kon = new koneksi();
         
@@ -266,7 +267,6 @@ public final class F_SendMessage extends javax.swing.JFrame {
                 try {
                     for (int i = 0; i < model.getSize(); i++){
                         app.doIt(String.valueOf(model.get(i)), txt_isipesan.getText());
-                        simpanPesan();
                     }        
                 } catch (Exception e){
                     e.printStackTrace();
@@ -275,20 +275,21 @@ public final class F_SendMessage extends javax.swing.JFrame {
                 app.doIt(txt_notujuan.getText(), txt_isipesan.getText());
             }
             //PANGGIL FUNGSI SENDMESSAGE
-            F_Main a = new F_Main(stradmin);
-            a.setVisible(true);
-            this.setVisible(false);
+            new F_Home().show();
+            this.dispose();
         } catch (Exception ex) {
-           Logger.getLogger(F_Main.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(F_History.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_btn_kirimActionPerformed
 
     private void btn_kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kembaliActionPerformed
         // TODO add your handling code here:
-        F_Main a = new F_Main(stradmin);
-        a.setVisible(true);
-        this.setVisible(false);
+//        F_Main a = new F_Main(stradmin);
+//        a.setVisible(true);
+//        this.setVisible(false);
+        new F_Home().show();
+        this.dispose();
     }//GEN-LAST:event_btn_kembaliActionPerformed
 
     private void btn_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahActionPerformed
