@@ -86,14 +86,10 @@ public class SendMessage
         }
         
         public void simpanPesan (String nomor, String pesan, String status) throws ClassNotFoundException {
-        kon = new koneksi();
-//        notujuan = txt_notujuan.getText(); //VARIABEL UNTUK SENDMESSAGE
-//        isipesan = txt_isipesan.getText(); //VARIABEL UNTUK SENDMESSAGE
-        
+        kon = new koneksi();        
         try {
             Statement stasql = (Statement)kon.Connect().createStatement();
             int runkueri = stasql.executeUpdate("insert into pesan (id_pesan, no_tujuan, isi_pesan, waktu, status) VALUES (NULL, '"+nomor+"','"+pesan+"', now(),'"+status+"')"); //Database pesan, field no_tujuan dan isi_pesan
-//            JOptionPane.showMessageDialog(null,"Pesan berhasil disimpan");
             stasql.close();
         } catch (SQLException e){
             JOptionPane.showMessageDialog(null,e.getMessage());
