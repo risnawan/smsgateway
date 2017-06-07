@@ -30,9 +30,10 @@ public class F_Registrasi extends javax.swing.JFrame {
     public F_Registrasi() {
         initComponents();
         kon = new koneksi();
-        
+        btn_ubah.setVisible(false);
         model = new DefaultTableModel ();
         jTable1.setModel(model);
+        model.addColumn("Id");
         model.addColumn("Nama");
         model.addColumn("Alamat");
         model.addColumn("Nomor");
@@ -76,6 +77,11 @@ public class F_Registrasi extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         btn_kembali.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -185,15 +191,38 @@ public class F_Registrasi extends javax.swing.JFrame {
     private void btn_baruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_baruActionPerformed
         // TODO add your handling code here:
         new F_RCrud().show();
+        F_RCrud.opsi = "baru";
         this.dispose();
     }//GEN-LAST:event_btn_baruActionPerformed
 
     private void btn_ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ubahActionPerformed
         // TODO add your handling code here:
+        if(jTable1.getSelectedRow()>=0){
+            new F_RCrud().show();
+            this.dispose();
+            F_RCrud.opsi = "edit";
+            F_RCrud.id = model.getValueAt(selectedRowIndex, 0).toString();
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Sorot record terlebih dahulu");
+        
     }//GEN-LAST:event_btn_ubahActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
         // TODO add your handling code here:
+            if(jTable1.getSelectedRow()>=0){
+            if (JOptionPane.showConfirmDialog(null,
+                    "Apa kamu yakin ingin mengahpus record tersebut?", "Sungguh?", 
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                try{
+                    hapus();
+                    Refresh();
+                }catch(Exception e){                    
+                }
+            }}
+        else
+                JOptionPane.showMessageDialog(null, "Sorot record terlebih dahulu");
     }//GEN-LAST:event_btn_hapusActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -205,6 +234,21 @@ public class F_Registrasi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowOpened
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        selectedRowIndex = jTable1.getSelectedRow();
+    }//GEN-LAST:event_jTable1MouseClicked
+     
+    public void hapus() throws ClassNotFoundException {
+        kon = new koneksi();        
+        try {
+            Statement stasql = (Statement)kon.Connect().createStatement();
+            int runkueri = stasql.executeUpdate("delete from warga where id = " + model.getValueAt(selectedRowIndex, 0).toString()); //Database pesan, field no_tujuan dan isi_pesan
+            stasql.close();
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+    }
       
     public void Refresh() throws ClassNotFoundException {
         try {
@@ -212,10 +256,12 @@ public class F_Registrasi extends javax.swing.JFrame {
             Statement stasql = (Statement)kon.Connect().createStatement();
             ResultSet runkueri = stasql.executeQuery("select * from warga"); //Database pesan, field no_tujuan dan isi_pesan
             while (runkueri.next()) {
-                Object[] obj = new Object[3];
-                obj[0] = runkueri.getString("nama");
-                obj[1] = runkueri.getString("alamat");
-                obj[2] = runkueri.getString("nomor");
+                Object[] obj = new Object[4];
+                obj[0] = runkueri.getString("id");
+                obj[1] = runkueri.getString("nama");
+                obj[2] = runkueri.getString("alamat");
+                obj[3] = runkueri.getString("nomor");
+                
                 model.addRow(obj);
             }
         } 
