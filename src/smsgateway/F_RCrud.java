@@ -188,7 +188,7 @@ public class F_RCrud extends javax.swing.JFrame {
         kon = new koneksi();        
         try {
             Statement stasql = (Statement)kon.Connect().createStatement();
-            int runkueri = stasql.executeUpdate("insert into warga (id, nama, alamat, nomor) VALUES (NULL, '"+nama+"','"+hp+"', '"+alamat+"')"); //Database pesan, field no_tujuan dan isi_pesan
+            int runkueri = stasql.executeUpdate("insert into warga (id, nama, alamat, nomor) VALUES (NULL, '"+nama+"','"+alamat+"', '"+hp+"')"); //Database pesan, field no_tujuan dan isi_pesan
             stasql.close();
         } catch (SQLException e){
             JOptionPane.showMessageDialog(null,e.getMessage());

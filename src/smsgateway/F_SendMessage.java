@@ -34,7 +34,7 @@ public final class F_SendMessage extends javax.swing.JFrame {
         stradmin = new admin().admin;
         initComponents();
         kon = new koneksi();
-        
+        jList1.setModel(model);
         lbl_namaadmin.setText(stradmin);
         txt_notujuan.setText("");
         txt_isipesan.setText("");
@@ -50,6 +50,16 @@ public final class F_SendMessage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        pBc = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        btn_hapus = new javax.swing.JButton();
+        btn_warga = new javax.swing.JButton();
+        btn_tambah = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txt_isipesan = new javax.swing.JTextArea();
         lbl_judul = new javax.swing.JLabel();
         lbl_notujuan = new javax.swing.JLabel();
         txt_notujuan = new javax.swing.JTextField();
@@ -57,15 +67,6 @@ public final class F_SendMessage extends javax.swing.JFrame {
         btn_kirim = new javax.swing.JToggleButton();
         btn_kembali = new javax.swing.JButton();
         lbl_namaadmin = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txt_isipesan = new javax.swing.JTextArea();
-        pBc = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<String>();
-        btn_hapus = new javax.swing.JButton();
-        btn_tambah = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -73,6 +74,81 @@ public final class F_SendMessage extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
+
+        jPanel1.setBackground(new java.awt.Color(0, 51, 51));
+
+        jCheckBox1.setBackground(new java.awt.Color(0, 51, 51));
+        jCheckBox1.setForeground(new java.awt.Color(51, 153, 255));
+        jCheckBox1.setText("Broadcast");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
+        pBc.setBackground(new java.awt.Color(0, 51, 51));
+        pBc.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Broadcast", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(51, 153, 255))); // NOI18N
+        pBc.setForeground(new java.awt.Color(51, 153, 255));
+        pBc.setToolTipText("Broadcast");
+
+        jList1.setForeground(new java.awt.Color(51, 153, 255));
+        jScrollPane2.setViewportView(jList1);
+
+        btn_hapus.setForeground(new java.awt.Color(51, 153, 255));
+        btn_hapus.setText("hapus nomor");
+        btn_hapus.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, null));
+        btn_hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_hapusActionPerformed(evt);
+            }
+        });
+
+        btn_warga.setForeground(new java.awt.Color(51, 153, 255));
+        btn_warga.setText("tambah nomor warga");
+        btn_warga.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, null));
+        btn_warga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_wargaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pBcLayout = new javax.swing.GroupLayout(pBc);
+        pBc.setLayout(pBcLayout);
+        pBcLayout.setHorizontalGroup(
+            pBcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pBcLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pBcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pBcLayout.createSequentialGroup()
+                        .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btn_warga, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pBcLayout.setVerticalGroup(
+            pBcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(pBcLayout.createSequentialGroup()
+                .addComponent(btn_hapus)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_warga))
+        );
+
+        btn_tambah.setForeground(new java.awt.Color(51, 153, 255));
+        btn_tambah.setText("tambah nomor");
+        btn_tambah.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, null));
+        btn_tambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tambahActionPerformed(evt);
+            }
+        });
+
+        txt_isipesan.setColumns(20);
+        txt_isipesan.setForeground(new java.awt.Color(51, 153, 255));
+        txt_isipesan.setRows(5);
+        jScrollPane1.setViewportView(txt_isipesan);
 
         lbl_judul.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbl_judul.setForeground(new java.awt.Color(51, 153, 255));
@@ -117,143 +193,85 @@ public final class F_SendMessage extends javax.swing.JFrame {
         lbl_namaadmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_namaadmin.setText("Nama Admin");
 
-        txt_isipesan.setColumns(20);
-        txt_isipesan.setForeground(new java.awt.Color(51, 153, 255));
-        txt_isipesan.setRows(5);
-        jScrollPane1.setViewportView(txt_isipesan);
-
-        pBc.setBackground(new java.awt.Color(0, 51, 51));
-        pBc.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Broadcast", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(51, 153, 255))); // NOI18N
-        pBc.setForeground(new java.awt.Color(51, 153, 255));
-        pBc.setToolTipText("Broadcast");
-
-        jList1.setForeground(new java.awt.Color(51, 153, 255));
-        jScrollPane2.setViewportView(jList1);
-
-        btn_hapus.setForeground(new java.awt.Color(51, 153, 255));
-        btn_hapus.setText("hapus nomor");
-        btn_hapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_hapusActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pBcLayout = new javax.swing.GroupLayout(pBc);
-        pBc.setLayout(pBcLayout);
-        pBcLayout.setHorizontalGroup(
-            pBcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pBcLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pBcLayout.setVerticalGroup(
-            pBcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_hapus)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        btn_tambah.setForeground(new java.awt.Color(51, 153, 255));
-        btn_tambah.setText("tambah nomor");
-        btn_tambah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_tambahActionPerformed(evt);
-            }
-        });
-
-        jCheckBox1.setForeground(new java.awt.Color(51, 153, 255));
-        jCheckBox1.setText("Broadcast");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-
-        jPanel1.setBackground(new java.awt.Color(0, 51, 51));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 10, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(lbl_judul, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txt_notujuan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox1))
+                    .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_notujuan)
+                    .addComponent(lbl_isipesan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pBc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_kirim, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_kembali)
+                .addGap(21, 21, 21))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(489, Short.MAX_VALUE)
+                    .addComponent(lbl_namaadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 489, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(pBc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(lbl_judul, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl_notujuan)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckBox1)
+                            .addComponent(txt_notujuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)
+                        .addComponent(btn_tambah)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl_isipesan)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_kirim)
+                    .addComponent(btn_kembali))
+                .addGap(19, 19, 19))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(20, 20, 20)
+                    .addComponent(lbl_namaadmin)
+                    .addContainerGap(452, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(lbl_judul, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbl_namaadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_notujuan)
-                    .addComponent(txt_notujuan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_tambah))
-                .addComponent(jCheckBox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pBc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lbl_isipesan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(450, 450, 450)
-                        .addComponent(btn_kirim)
-                        .addGap(19, 19, 19)
-                        .addComponent(btn_kembali)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_judul, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_namaadmin))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl_notujuan)
-                                .addGap(3, 3, 3)
-                                .addComponent(txt_notujuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(btn_tambah))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jCheckBox1))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(pBc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_isipesan)
-                .addGap(8, 8, 8)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_kirim)
-                    .addComponent(btn_kembali))
-                .addContainerGap(13, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -299,7 +317,7 @@ public final class F_SendMessage extends javax.swing.JFrame {
 //        }catch(Exception es){
 //            JOptionPane.showMessageDialog(null,"Masukkan hanya angka saja");
 //        }
-        jList1.setModel(model);
+        
         if (!txt_notujuan.getText().isEmpty())
             model.addElement(txt_notujuan.getText());
         
@@ -339,6 +357,28 @@ public final class F_SendMessage extends javax.swing.JFrame {
         pBc.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
 
+    private void btn_wargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_wargaActionPerformed
+        // TODO add your handling code here:
+        kon = new koneksi();
+        try{
+            addWarga();
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_btn_wargaActionPerformed
+
+    public void addWarga() throws ClassNotFoundException {
+        try {
+            Statement stasql = (Statement)kon.Connect().createStatement();
+            ResultSet runkueri = stasql.executeQuery("select * from warga"); //Database pesan, field no_tujuan dan isi_pesan
+            while (runkueri.next()) {
+                model.addElement(runkueri.getString("nomor"));
+            }
+        } 
+        catch (SQLException e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+    }
     public void simpanPesan () throws ClassNotFoundException {
         
         notujuan = txt_notujuan.getText(); //VARIABEL UNTUK SENDMESSAGE
@@ -396,6 +436,7 @@ public final class F_SendMessage extends javax.swing.JFrame {
     private javax.swing.JButton btn_kembali;
     private javax.swing.JToggleButton btn_kirim;
     private javax.swing.JButton btn_tambah;
+    private javax.swing.JButton btn_warga;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
