@@ -63,18 +63,14 @@
                   </Group>
                   <EmptySpace pref="140" max="32767" attributes="0"/>
               </Group>
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel2" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Component id="btn_kembali" min="-2" pref="112" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btn_simpan" min="-2" pref="111" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="btn_kembali" min="-2" pref="112" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btn_simpan" min="-2" pref="111" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
+              <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -220,6 +216,11 @@
           </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
 
           <Layout>
             <DimensionLayout dim="0">
