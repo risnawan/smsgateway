@@ -7,7 +7,9 @@ package smsgateway;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import utils.koneksi;
 
 /**
@@ -24,6 +26,8 @@ public class F_InputGempa extends javax.swing.JFrame {
     
     public F_InputGempa() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 
     /**
@@ -50,6 +54,7 @@ public class F_InputGempa extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btn_simpan = new javax.swing.JButton();
+        btn_simpan2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         txt_lokasi = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -142,12 +147,24 @@ public class F_InputGempa extends javax.swing.JFrame {
             }
         });
 
+        btn_simpan2.setBackground(new java.awt.Color(0, 0, 0));
+        btn_simpan2.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        btn_simpan2.setForeground(new java.awt.Color(51, 153, 255));
+        btn_simpan2.setText("Kembali");
+        btn_simpan2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_simpan2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(btn_simpan2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -155,7 +172,9 @@ public class F_InputGempa extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btn_simpan)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_simpan)
+                    .addComponent(btn_simpan2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -287,7 +306,7 @@ public class F_InputGempa extends javax.swing.JFrame {
         } catch(Exception e){
             System.err.println(e.getMessage());
         }
-        
+//        new F_Home().show();
         this.dispose();
         
         //Simpan ke Database Gempa
@@ -322,6 +341,12 @@ public class F_InputGempa extends javax.swing.JFrame {
         String[] args= new String[1];
         lokasi.main(args);
     }//GEN-LAST:event_btn_simpan1ActionPerformed
+
+    private void btn_simpan2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpan2ActionPerformed
+        // TODO add your handling code here:
+//        new F_Home().show();
+        this.dispose();
+    }//GEN-LAST:event_btn_simpan2ActionPerformed
 
     public void simpan(String kekuatan, String kedalaman, String lempeng, String lokasi, String jarak) throws ClassNotFoundException {
         kon = new koneksi();        
@@ -385,6 +410,7 @@ public class F_InputGempa extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_simpan;
     private javax.swing.JButton btn_simpan1;
+    private javax.swing.JButton btn_simpan2;
     private javax.swing.ButtonGroup btngrp_lempeng;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
