@@ -55,6 +55,7 @@ public class F_InputGempa extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txt_jarak = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        btn_simpan1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -179,12 +180,22 @@ public class F_InputGempa extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(51, 153, 255));
         jLabel9.setText("Km");
 
+        btn_simpan1.setBackground(new java.awt.Color(0, 0, 0));
+        btn_simpan1.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        btn_simpan1.setForeground(new java.awt.Color(51, 153, 255));
+        btn_simpan1.setText("cek");
+        btn_simpan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_simpan1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(82, 82, 82)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -212,7 +223,9 @@ public class F_InputGempa extends javax.swing.JFrame {
                         .addComponent(txt_jarak, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel9)))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_simpan1)
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,8 +249,10 @@ public class F_InputGempa extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt_lokasi))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txt_lokasi)
+                        .addComponent(btn_simpan1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
@@ -302,6 +317,12 @@ public class F_InputGempa extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txt_jarakKeyTyped
 
+    private void btn_simpan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpan1ActionPerformed
+        // TODO add your handling code here:
+        String[] args= new String[1];
+        lokasi.main(args);
+    }//GEN-LAST:event_btn_simpan1ActionPerformed
+
     public void simpan(String kekuatan, String kedalaman, String lempeng, String lokasi, String jarak) throws ClassNotFoundException {
         kon = new koneksi();        
         String potensi = "";
@@ -363,6 +384,7 @@ public class F_InputGempa extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_simpan;
+    private javax.swing.JButton btn_simpan1;
     private javax.swing.ButtonGroup btngrp_lempeng;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

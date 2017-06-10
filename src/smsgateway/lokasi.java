@@ -9,24 +9,27 @@ package smsgateway;
  *
  * @author risnawan
  */
-//import com.teamdev.jxbrowser.chromium.Browser;
-//import com.teamdev.jxbrowser.chromium.swing.BrowserView;
+import com.teamdev.jxbrowser.chromium.Browser;
+import com.teamdev.jxbrowser.chromium.swing.BrowserView;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 
 public class lokasi {
     
    public static final int MIN_ZOOM = 0;
    public static final int MAX_ZOOM = 21;
+   
 
    /**
     * In map.html file default zoom value is set to 4.
     */
    private static int zoomValue = 4;
 
-   public static void main(String[] args) {/*
+   
+   public static void main(String[] args) {
        final Browser browser = new Browser();
        BrowserView browserView = new BrowserView(browser);
 
@@ -47,7 +50,7 @@ public class lokasi {
                }
            }
        });
-
+/*
        JButton setMarkerButton = new JButton("Set Marker");
        setMarkerButton.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
@@ -58,6 +61,13 @@ public class lokasi {
                        "    title: 'Hello World!'\n" +
                        "});");
            }
+       });*/
+
+       JButton setMarkerButton = new JButton("Tutup");
+       setMarkerButton.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent e) {
+               
+           }
        });
 
        JPanel toolBar = new JPanel();
@@ -66,13 +76,19 @@ public class lokasi {
        toolBar.add(setMarkerButton);
 
        JFrame frame = new JFrame("map.html");
-       frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+       frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
        frame.add(toolBar, BorderLayout.SOUTH);
        frame.add(browserView, BorderLayout.CENTER);
        frame.setSize(900, 500);
        frame.setLocationRelativeTo(null);
        frame.setVisible(true);
+       frame.setLocationRelativeTo(null);
+       frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//       frame.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+       
 
-       browser.loadURL("E:/M Risnawan Budiato/Kuliah/semester 8/Pemrograman Jaringan/smsgateway/src/smsgateway/map.html");
-   */}
+       browser.loadURL("https://www.google.co.id/maps/");
+//       browser.loadURL("E:/M Risnawan Budiato/Kuliah/semester 8/Pemrograman Jaringan/smsgateway/src/smsgateway/map.html");
+   }
+   
 }
