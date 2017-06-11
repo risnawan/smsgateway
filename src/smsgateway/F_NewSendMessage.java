@@ -612,7 +612,7 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         Service.getInstance().addGateway(gateway);
         Service.getInstance().startService();
 
-        for (int i = 0; i < (nomor.getSize() * 1000); i++) {
+        for (int i = 0; i < nomor.getSize(); i++) {
 //            try {
 //                jProgressBar1.setValue(nomor.getSize() / i);
 //                jProgressBar1.repaint();
@@ -658,7 +658,6 @@ public class F_NewSendMessage extends javax.swing.JFrame {
     }
 
     public class OutboundNotification implements IOutboundMessageNotification {
-
         public void process(AGateway gateway, OutboundMessage msg) {
             System.out.println("Outbound handler called from Gateway: " + gateway.getGatewayId());
             System.out.println(msg);
