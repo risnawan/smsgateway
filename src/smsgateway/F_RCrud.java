@@ -5,8 +5,10 @@
  */
 package smsgateway;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.concurrent.ExecutionException;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +21,8 @@ public class F_RCrud extends javax.swing.JFrame {
      * Creates new form F_RCrud
      */
     private koneksi kon;
+    public static String id, opsi;
+    
     public F_RCrud() {
         initComponents();
     }
@@ -45,6 +49,11 @@ public class F_RCrud extends javax.swing.JFrame {
         txt_alamat = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel5.setBackground(new java.awt.Color(0, 51, 51));
 
@@ -184,6 +193,17 @@ public class F_RCrud extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_simpan6ActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        if (opsi=="edit"){
+            try{
+                Tampilkan();
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }//GEN-LAST:event_formWindowOpened
+
     public void simpan(String nama, String hp, String alamat) throws ClassNotFoundException {
         kon = new koneksi();        
         try {
@@ -191,6 +211,21 @@ public class F_RCrud extends javax.swing.JFrame {
             int runkueri = stasql.executeUpdate("insert into warga (id, nama, alamat, nomor) VALUES (NULL, '"+nama+"','"+alamat+"', '"+hp+"')"); //Database pesan, field no_tujuan dan isi_pesan
             stasql.close();
         } catch (SQLException e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+    }
+    
+    public void Tampilkan() throws ClassNotFoundException {
+        try {
+            Statement stasql = (Statement)kon.Connect().createStatement();
+            ResultSet runkueri = stasql.executeQuery("select * from warga where id = " + id); //Database pesan, field no_tujuan dan isi_pesan
+            while (runkueri.next()) {
+                txt_nama.setText(runkueri.getString("nama"));
+                txt_hp.setText(runkueri.getString("nomor"));
+                txt_alamat.setText(runkueri.getString("alamat"));
+            }
+        } 
+        catch (SQLException e){
             JOptionPane.showMessageDialog(null,e.getMessage());
         }
     }
@@ -230,88 +265,16 @@ public class F_RCrud extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_kembali;
-    private javax.swing.JButton btn_kembali1;
-    private javax.swing.JButton btn_kembali2;
-    private javax.swing.JButton btn_kembali3;
-    private javax.swing.JButton btn_kembali4;
-    private javax.swing.JButton btn_kembali5;
     private javax.swing.JButton btn_kembali6;
-    private javax.swing.JButton btn_simpan;
-    private javax.swing.JButton btn_simpan1;
-    private javax.swing.JButton btn_simpan2;
-    private javax.swing.JButton btn_simpan3;
-    private javax.swing.JButton btn_simpan4;
-    private javax.swing.JButton btn_simpan5;
     private javax.swing.JButton btn_simpan6;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txt_alamat;
-    private javax.swing.JTextField txt_baudrate;
-    private javax.swing.JTextField txt_baudrate1;
-    private javax.swing.JTextField txt_baudrate2;
-    private javax.swing.JTextField txt_baudrate3;
-    private javax.swing.JTextField txt_baudrate4;
-    private javax.swing.JTextField txt_baudrate5;
-    private javax.swing.JTextField txt_comport;
-    private javax.swing.JTextField txt_comport1;
-    private javax.swing.JTextField txt_comport2;
-    private javax.swing.JTextField txt_comport3;
-    private javax.swing.JTextField txt_comport4;
-    private javax.swing.JTextField txt_comport5;
     private javax.swing.JTextField txt_hp;
-    private javax.swing.JTextField txt_manu;
-    private javax.swing.JTextField txt_manu1;
-    private javax.swing.JTextField txt_manu2;
-    private javax.swing.JTextField txt_manu3;
-    private javax.swing.JTextField txt_manu4;
-    private javax.swing.JTextField txt_manu5;
-    private javax.swing.JTextField txt_model;
-    private javax.swing.JTextField txt_model1;
-    private javax.swing.JTextField txt_model2;
-    private javax.swing.JTextField txt_model3;
-    private javax.swing.JTextField txt_model4;
-    private javax.swing.JTextField txt_model5;
     private javax.swing.JTextField txt_nama;
     // End of variables declaration//GEN-END:variables
 }
