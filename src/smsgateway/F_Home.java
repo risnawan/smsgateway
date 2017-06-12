@@ -22,34 +22,7 @@ public class F_Home extends javax.swing.JFrame {
     
     public F_Home() {
         initComponents();
-        /*try {
-                BufferedImage gambar = ImageIO.read(getClass().getResource("/smsgateway/image/send.png"));
-                ImageIcon icon = new ImageIcon(gambar);
-                lSend.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/smsgateway/image/send.png")).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-            } catch (Exception ex) {
-                System.out.println("problem accessing file" );    
-            }
-        try {
-                BufferedImage gambar = ImageIO.read(getClass().getResource("/smsgateway/image/history.png"));
-                ImageIcon icon = new ImageIcon(gambar);
-                lHistory.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/smsgateway/image/history.png")).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-            } catch (Exception ex) {
-                System.out.println("problem accessing file" );    
-            }
-        try {
-                BufferedImage gambar = ImageIO.read(getClass().getResource("/smsgateway/image/regis.png"));
-                ImageIcon icon = new ImageIcon(gambar);
-                lRegistrasi.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/smsgateway/image/regis.png")).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-            } catch (Exception ex) {
-                System.out.println("problem accessing file" );    
-            }
-        try {
-                BufferedImage gambar = ImageIO.read(getClass().getResource("/smsgateway/image/setting.png"));
-                ImageIcon icon = new ImageIcon(gambar);
-                lKonfig.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/smsgateway/image/setting.png")).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-            } catch (Exception ex) {
-                System.out.println("problem accessing file" );    
-            }*/
+        lbl_namaadmin.setText(F_Login.stradmin);
 //==========NEW==========  
         try {
                 BufferedImage gambar = ImageIO.read(getClass().getResource("/smsgateway/image/send.png"));
@@ -91,7 +64,6 @@ public class F_Home extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btn_logout = new javax.swing.JButton();
         bSend = new javax.swing.JButton();
         bHistory = new javax.swing.JButton();
         bRegistrasi = new javax.swing.JButton();
@@ -99,20 +71,15 @@ public class F_Home extends javax.swing.JFrame {
         bNotifikasi = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        bNotifikasi1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        lbl_namaadmin = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        btn_logout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 51));
-
-        btn_logout.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        btn_logout.setText("Keluar");
-        btn_logout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_logoutActionPerformed(evt);
-            }
-        });
 
         bSend.setBackground(new java.awt.Color(0, 0, 0));
         bSend.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
@@ -167,10 +134,19 @@ public class F_Home extends javax.swing.JFrame {
         });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel2.setPreferredSize(new java.awt.Dimension(82, 66));
 
         jLabel1.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 153, 255));
         jLabel1.setText("Menu");
+
+        jLabel2.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 153, 255));
+        jLabel2.setText("Admin");
+
+        lbl_namaadmin.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        lbl_namaadmin.setForeground(new java.awt.Color(51, 153, 255));
+        lbl_namaadmin.setText("Nama Admin");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -178,69 +154,90 @@ public class F_Home extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbl_namaadmin, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addComponent(lbl_namaadmin))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        bNotifikasi1.setBackground(new java.awt.Color(0, 0, 0));
-        bNotifikasi1.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        bNotifikasi1.setForeground(new java.awt.Color(51, 153, 255));
-        bNotifikasi1.setText("Pesan Darurat Tsunami");
-        bNotifikasi1.addActionListener(new java.awt.event.ActionListener() {
+        jPanel3.setBackground(new java.awt.Color(255, 255, 204));
+
+        btn_logout.setBackground(new java.awt.Color(0, 0, 0));
+        btn_logout.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        btn_logout.setForeground(new java.awt.Color(51, 153, 255));
+        btn_logout.setText("Keluar");
+        btn_logout.setPreferredSize(new java.awt.Dimension(70, 30));
+        btn_logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bNotifikasi1ActionPerformed(evt);
+                btn_logoutActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bSend, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bKonfig, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bNotifikasi1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 65, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(bNotifikasi, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bSend, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bKonfig, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bRegistrasi, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bNotifikasi, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(65, 65, 65))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(504, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bSend, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bNotifikasi, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bNotifikasi1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bKonfig, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bRegistrasi, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
-                .addComponent(btn_logout)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bKonfig, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -293,12 +290,6 @@ public class F_Home extends javax.swing.JFrame {
         //this.dispose();
     }//GEN-LAST:event_bNotifikasiActionPerformed
 
-    private void bNotifikasi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNotifikasi1ActionPerformed
-        // TODO add your handling code here:
-        // new F_Darurat().show();
-        //this.dispose();
-    }//GEN-LAST:event_bNotifikasi1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -338,12 +329,14 @@ public class F_Home extends javax.swing.JFrame {
     private javax.swing.JButton bHistory;
     private javax.swing.JButton bKonfig;
     private javax.swing.JButton bNotifikasi;
-    private javax.swing.JButton bNotifikasi1;
     private javax.swing.JButton bRegistrasi;
     private javax.swing.JButton bSend;
     private javax.swing.JButton btn_logout;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lbl_namaadmin;
     // End of variables declaration//GEN-END:variables
 }
