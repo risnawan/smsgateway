@@ -286,8 +286,8 @@ public class F_Home extends javax.swing.JFrame {
 
     private void bNotifikasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNotifikasiActionPerformed
         // TODO add your handling code here:
-        //new F_Notifikasi().show();
-        //this.dispose();
+        new F_InputGempa().show();
+        this.dispose();
     }//GEN-LAST:event_bNotifikasiActionPerformed
 
     /**

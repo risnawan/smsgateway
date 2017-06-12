@@ -95,4 +95,125 @@ public class SendMessage
             JOptionPane.showMessageDialog(null,e.getMessage());
         }
     }
+        public void doIt2(String nomor, String pesan) throws Exception
+        {
+            Properties prop = new Properties();
+            InputStream input = null;
+            try {
+		input = new FileInputStream("src/settingmodem.properties");
+		// load a properties file
+		prop.load(input);
+		// get the property value and print it out
+		System.out.println(prop.getProperty("baudRate"));
+		System.out.println(prop.getProperty("comPort"));
+		System.out.println(prop.getProperty("model")); 
+        } catch (IOException ex) {
+		ex.printStackTrace();
+	} finally {
+		if (input != null) {
+			try {
+				input.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+            
+            OutboundNotification outboundNotification = new OutboundNotification();
+                SerialModemGateway gateway = new SerialModemGateway("", prop.getProperty("comPort", "com9"), Integer.parseInt(prop.getProperty("baudRate", "9600")), "", prop.getProperty("model", "AirCard 312U"));
+                gateway.setInbound(true);
+                gateway.setOutbound(true);
+                Service.getInstance().setOutboundMessageNotification(outboundNotification);
+                Service.getInstance().addGateway(gateway);
+                Service.getInstance().startService();
+                
+                for(int i=0; i<50;i++){
+                    if(i%20 ==0){
+                        Service.getInstance().stopService();
+                        Service.getInstance().removeGateway(gateway);
+                        Service.getInstance().addGateway(gateway);
+                        Service.getInstance().startService();
+                    } else{
+                        OutboundMessage msg = new OutboundMessage(nomor, pesan + i);
+                    msg.setFlashSms(true);
+                    Service.getInstance().sendMessage(msg);
+                    System.out.println(msg);
+                    if(String.valueOf(msg.getMessageStatus()).equals("FAILED")){
+                        sta = "tidak terkirim";
+                        System.out.println(nomor + " gagal terkirim"); 
+                    }else if(String.valueOf(msg.getMessageStatus()).equals("SENT")){
+                        System.out.println(nomor + " berhasil terkirim");
+                        sta = "terkirim";
+                    }    
+                    System.out.println(i);
+                }
+            }    
+                    
+                    
+                
+                
+                
+                simpanPesan(nomor, pesan, sta);
+//                System.out.print(msg.getMessageStatus());
+                Service.getInstance().stopService();
+                Service.getInstance().removeGateway(gateway);
+        }
+        
+        public void doIt3(String nomor, String pesan) throws Exception
+        {
+            Properties prop = new Properties();
+            InputStream input = null;
+            try {
+		input = new FileInputStream("src/settingmodem.properties");
+		// load a properties file
+		prop.load(input);
+		// get the property value and print it out
+		System.out.println(prop.getProperty("baudRate"));
+		System.out.println(prop.getProperty("comPort"));
+		System.out.println(prop.getProperty("model")); 
+        } catch (IOException ex) {
+		ex.printStackTrace();
+	} finally {
+		if (input != null) {
+			try {
+				input.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+            
+            OutboundNotification outboundNotification = new OutboundNotification();
+                SerialModemGateway gateway = new SerialModemGateway("", prop.getProperty("comPort", "com9"), Integer.parseInt(prop.getProperty("baudRate", "9600")), "", prop.getProperty("model", "AirCard 312U"));
+                gateway.setInbound(true);
+                gateway.setOutbound(true);
+                Service.getInstance().setOutboundMessageNotification(outboundNotification);
+                Service.getInstance().addGateway(gateway);
+                Service.getInstance().startService();
+                OutboundMessage[] msg = new OutboundMessage[50];
+                
+                for(int i=0; i<50;i++){
+                    msg[i].setRecipient("081908316892");
+                    msg[i].setFlashSms(true);
+                    msg[i].setText("pesan");
+                }
+                for (int i = 0; i<50; i++){
+                    Service.getInstance().sendMessage(msg[i]);
+                    System.out.println(msg[i]);
+                    if(String.valueOf(msg[i].getMessageStatus()).equals("FAILED")){
+                        sta = "tidak terkirim";
+                        System.out.println(nomor + " gagal terkirim"); 
+                    }else if(String.valueOf(msg[i].getMessageStatus()).equals("SENT")){
+                        System.out.println(nomor + " berhasil terkirim");
+                        sta = "terkirim";
+                    }    
+                    System.out.println(i);
+                }
+                
+                
+                simpanPesan(nomor, pesan, sta);
+//                System.out.print(msg.getMessageStatus());
+                Service.getInstance().stopService();
+                Service.getInstance().removeGateway(gateway);
+        }
 }
