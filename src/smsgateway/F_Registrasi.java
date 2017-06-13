@@ -69,6 +69,7 @@ public class F_Registrasi extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 51, 51));
 
         jTable1.setBackground(new java.awt.Color(204, 255, 204));
+        jTable1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

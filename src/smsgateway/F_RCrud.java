@@ -87,7 +87,7 @@ public class F_RCrud extends javax.swing.JFrame {
 
         jLabel31.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(51, 153, 255));
-        jLabel31.setText("Form Warga");
+        jLabel31.setText("Form Registrasi Penduduk");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -95,7 +95,7 @@ public class F_RCrud extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(

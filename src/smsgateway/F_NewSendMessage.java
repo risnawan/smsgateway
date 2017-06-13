@@ -44,7 +44,7 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        btn_warga = new javax.swing.JButton();
+        btn_penduduk = new javax.swing.JButton();
         btn_hapus = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         pnl_broadcast = new javax.swing.JPanel();
@@ -90,6 +90,11 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         btn_kembali.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         btn_kembali.setForeground(new java.awt.Color(51, 153, 255));
         btn_kembali.setText("Kembali");
+        btn_kembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_kembaliActionPerformed(evt);
+            }
+        });
 
         btn_kirim.setBackground(new java.awt.Color(0, 0, 0));
         btn_kirim.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
@@ -147,8 +152,8 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         jList1.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         jScrollPane1.setViewportView(jList1);
 
-        btn_warga.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        btn_warga.setText("Tambah Nomor Warga");
+        btn_penduduk.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        btn_penduduk.setText("Tambah Nomor Penduduk");
 
         btn_hapus.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         btn_hapus.setText("Hapus Nomor");
@@ -161,7 +166,7 @@ public class F_NewSendMessage extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_warga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_penduduk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_hapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -172,7 +177,7 @@ public class F_NewSendMessage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_warga))
+                .addComponent(btn_penduduk))
         );
 
         jLabel2.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
@@ -237,7 +242,7 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         pnl_darurat.setLayout(pnl_daruratLayout);
         pnl_daruratLayout.setHorizontalGroup(
             pnl_daruratLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
         );
         pnl_daruratLayout.setVerticalGroup(
             pnl_daruratLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,14 +253,14 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(66, 66, 66)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(pnl_broadcast, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -331,6 +336,12 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_check_daruratActionPerformed
 
+    private void btn_kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kembaliActionPerformed
+        // TODO add your handling code here:
+        new F_Home().show();
+        this.dispose();
+    }//GEN-LAST:event_btn_kembaliActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -370,8 +381,8 @@ public class F_NewSendMessage extends javax.swing.JFrame {
     private javax.swing.JButton btn_hapus;
     private javax.swing.JButton btn_kembali;
     private javax.swing.JButton btn_kirim;
+    private javax.swing.JButton btn_penduduk;
     private javax.swing.JButton btn_tambah;
-    private javax.swing.JButton btn_warga;
     private javax.swing.ButtonGroup btngrp_jenispesan;
     private javax.swing.JCheckBox check_broadcast;
     private javax.swing.JCheckBox check_darurat;

@@ -286,8 +286,8 @@ public class F_Home extends javax.swing.JFrame {
 
     private void bNotifikasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNotifikasiActionPerformed
         // TODO add your handling code here:
-        //new F_Notifikasi().show();
-        //this.dispose();
+        new F_NotifikasiGempa().show();
+        this.dispose();
     }//GEN-LAST:event_bNotifikasiActionPerformed
 
     /**
@@ -320,7 +320,8 @@ public class F_Home extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new F_Home().setVisible(true);
+                //new F_Home().setVisible(true);
+                new F_Login().setVisible(true);
             }
         });
     }
