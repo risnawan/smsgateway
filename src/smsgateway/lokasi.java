@@ -9,8 +9,8 @@ package smsgateway;
  *
  * @author risnawan
  */
-import com.teamdev.jxbrowser.chromium.Browser;
-import com.teamdev.jxbrowser.chromium.swing.BrowserView;
+//import com.teamdev.jxbrowser.chromium.Browser;
+//import com.teamdev.jxbrowser.chromium.swing.BrowserView;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -26,7 +26,7 @@ public class lokasi {
     */
    private static int zoomValue = 4;
 
-   public static void main(String[] args) {
+   public static void main(String[] args) {/*
        final Browser browser = new Browser();
        BrowserView browserView = new BrowserView(browser);
 
@@ -74,5 +74,5 @@ public class lokasi {
        frame.setVisible(true);
 
        browser.loadURL("E:/M Risnawan Budiato/Kuliah/semester 8/Pemrograman Jaringan/smsgateway/src/smsgateway/map.html");
-   }
+   */}
 }

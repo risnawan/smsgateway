@@ -26,6 +26,7 @@ public class SendMessage {
 
     private koneksi kon;
     private String sta;
+            
 //    private String kueri;
 
     public void doIt(String nomor, String pesan) throws Exception {
@@ -116,23 +117,30 @@ public class SendMessage {
                 }
             }
         }
+//        OutboundNotification outboundNotification = new OutboundNotification();
+//        SerialModemGateway gateway = new SerialModemGateway("", prop.getProperty("comPort", "com9"), Integer.parseInt(prop.getProperty("baudRate", "9600")), "", prop.getProperty("model", "AirCard 312U"));
+//        gateway.setInbound(true);
+//        gateway.setOutbound(true);
+//        Service.getInstance().setOutboundMessageNotification(outboundNotification);
+//        Service.getInstance().addGateway(gateway);
+//        Service.getInstance().startService();
         
-        OutboundNotification outboundNotification = new OutboundNotification();
-        SerialModemGateway gateway = new SerialModemGateway("", prop.getProperty("comPort", "com9"), Integer.parseInt(prop.getProperty("baudRate", "9600")), "", prop.getProperty("model", "AirCard 312U"));
-        gateway.setInbound(true);
-        gateway.setOutbound(true);
-        Service.getInstance().setOutboundMessageNotification(outboundNotification);
-        Service.getInstance().addGateway(gateway);
-        Service.getInstance().startService();
-
-        for (int i = 0; i < nomor.getSize(); i++){
+        
+        for (int i = 0; i < (nomor.getSize()*1000); i++){
+            try {
+//                F_NewSendMessage.nilai = nomor.getSize()/i;
+//                progress.update(nomor.getSize()/i);
+            } catch (Exception e) {
+//                F_NewSendMessage.nilai = 0;
+            }
+            /*
                 if (i % 20 == 0) {
                 Service.getInstance().stopService();
                 Service.getInstance().removeGateway(gateway);
                 Service.getInstance().addGateway(gateway);
                 Service.getInstance().startService();
                 OutboundMessage msg = new OutboundMessage(String.valueOf(nomor.get(i)), pesan);
-                msg.setFlashSms(true);
+//                msg.setFlashSms(true);
                 Service.getInstance().sendMessage(msg);
                 System.out.println(msg);
                 if (String.valueOf(msg.getMessageStatus()).equals("FAILED")) {
@@ -144,7 +152,7 @@ public class SendMessage {
                 }
             } else {
                 OutboundMessage msg = new OutboundMessage(String.valueOf(nomor.get(i)), pesan);
-                msg.setFlashSms(true);
+//                msg.setFlashSms(true);
                 Service.getInstance().sendMessage(msg);
                 System.out.println(msg);
                 if (String.valueOf(msg.getMessageStatus()).equals("FAILED")) {
@@ -155,11 +163,11 @@ public class SendMessage {
                     sta = "terkirim";
                 }
             }
-                simpanPesan(String.valueOf(nomor.get(i)), pesan, sta);
-            
+                simpanPesan(String.valueOf(nomor.get(i)), pesan, sta);*/
+            System.out.println("berhasil terkirim "+i);
         }
-        Service.getInstance().stopService();
-        Service.getInstance().removeGateway(gateway);
+//        Service.getInstance().stopService();
+//        Service.getInstance().removeGateway(gateway);
     }
 
     public void doIt3(String nomor, String pesan) throws Exception {

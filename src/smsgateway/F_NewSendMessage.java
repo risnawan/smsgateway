@@ -5,13 +5,20 @@
  */
 package smsgateway;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import org.smslib.AGateway;
+import org.smslib.IOutboundMessageNotification;
+import org.smslib.OutboundMessage;
 
 /**
  *
@@ -27,7 +34,9 @@ public class F_NewSendMessage extends javax.swing.JFrame {
     private String kueri;
     private String stradmin;
     DefaultListModel model = new DefaultListModel();
+//    public static int nilai;
     
+    private String sta;
     
     public F_NewSendMessage() {
         initComponents();
@@ -40,6 +49,7 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         
         kon = new koneksi();
         jList1.setModel(model);
+//        jProgressBar1.setValue(nilai);
     }
 
     /**
@@ -58,6 +68,7 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         btn_kembali = new javax.swing.JButton();
         btn_kirim = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
         jPanel4 = new javax.swing.JPanel();
         txt_notujuan = new javax.swing.JTextField();
         btn_tambah = new javax.swing.JButton();
@@ -134,17 +145,20 @@ public class F_NewSendMessage extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btn_kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(122, 122, 122)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_kirim, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_kembali, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_kirim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_kirim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -416,11 +430,11 @@ public class F_NewSendMessage extends javax.swing.JFrame {
     private void btn_kirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kirimActionPerformed
         // TODO add your handling code here:
         try {
+//            new progress().show();
             SendMessage app = new SendMessage();
             if (check_broadcast.isSelected()){
                 try {
-                    
-                        app.doIt2(model, txt_isipesan.getText());
+                        send(model, txt_isipesan.getText());
                           
                 } catch (Exception e){
                     e.printStackTrace();
@@ -462,21 +476,116 @@ public class F_NewSendMessage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,e.getMessage());
         }
     }
-    public void simpanPesan () throws ClassNotFoundException {
-        
-        notujuan = txt_notujuan.getText(); //VARIABEL UNTUK SENDMESSAGE
-        isipesan = txt_isipesan.getText(); //VARIABEL UNTUK SENDMESSAGE
-        
-        try {
-            Statement stasql = (Statement)kon.Connect().createStatement();
-            int runkueri = stasql.executeUpdate("insert into pesan (id_pesan, no_tujuan, isi_pesan) VALUES (NULL, '"+notujuan+"','"+isipesan+"')"); //Database pesan, field no_tujuan dan isi_pesan
-//            JOptionPane.showMessageDialog(null,"Pesan berhasil disimpan");
-            stasql.close();
-        } catch (SQLException e){
-            JOptionPane.showMessageDialog(null,e.getMessage());
+//    public void simpanPesan() throws ClassNotFoundException {
+//        
+//        notujuan = txt_notujuan.getText(); //VARIABEL UNTUK SENDMESSAGE
+//        isipesan = txt_isipesan.getText(); //VARIABEL UNTUK SENDMESSAGE
+//        
+//        try {
+//            Statement stasql = (Statement)kon.Connect().createStatement();
+//            int runkueri = stasql.executeUpdate("insert into pesan (id_pesan, no_tujuan, isi_pesan) VALUES (NULL, '"+notujuan+"','"+isipesan+"')"); //Database pesan, field no_tujuan dan isi_pesan
+////            JOptionPane.showMessageDialog(null,"Pesan berhasil disimpan");
+//            stasql.close();
+//        } catch (SQLException e){
+//            JOptionPane.showMessageDialog(null,e.getMessage());
+//        }
+//    }
+    
+    public class OutboundNotification implements IOutboundMessageNotification {
+
+        public void process(AGateway gateway, OutboundMessage msg) {
+            System.out.println("Outbound handler called from Gateway: " + gateway.getGatewayId());
+            System.out.println(msg);
         }
     }
-    
+
+    public void simpanPesan(String nomor, String pesan, String status) throws ClassNotFoundException {
+        kon = new koneksi();
+        try {
+            Statement stasql = (Statement) kon.Connect().createStatement();
+            int runkueri = stasql.executeUpdate("insert into pesan (id_pesan, no_tujuan, isi_pesan, waktu, status) VALUES (NULL, '" + nomor + "','" + pesan + "', now(),'" + status + "')"); //Database pesan, field no_tujuan dan isi_pesan
+            stasql.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+
+    public void send(DefaultListModel nomor, String pesan) throws Exception {
+        Properties prop = new Properties();
+        InputStream input = null;
+        try {
+            input = new FileInputStream("src/settingmodem.properties");
+            // load a properties file
+            prop.load(input);
+            // get the property value and print it out
+            System.out.println(prop.getProperty("baudRate"));
+            System.out.println(prop.getProperty("comPort"));
+            System.out.println(prop.getProperty("model"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+//        OutboundNotification outboundNotification = new OutboundNotification();
+//        SerialModemGateway gateway = new SerialModemGateway("", prop.getProperty("comPort", "com9"), Integer.parseInt(prop.getProperty("baudRate", "9600")), "", prop.getProperty("model", "AirCard 312U"));
+//        gateway.setInbound(true);
+//        gateway.setOutbound(true);
+//        Service.getInstance().setOutboundMessageNotification(outboundNotification);
+//        Service.getInstance().addGateway(gateway);
+//        Service.getInstance().startService();
+        
+        
+        for (int i = 0; i < (nomor.getSize()*1000); i++){
+            try {
+                jProgressBar1.setValue(nomor.getSize()/i);
+                jProgressBar1.repaint();
+//                progress.update(nomor.getSize()/i);
+            } catch (Exception e) {
+                jProgressBar1.setValue(0);
+                jProgressBar1.repaint();
+            }
+            /*
+                if (i % 20 == 0) {
+                Service.getInstance().stopService();
+                Service.getInstance().removeGateway(gateway);
+                Service.getInstance().addGateway(gateway);
+                Service.getInstance().startService();
+                OutboundMessage msg = new OutboundMessage(String.valueOf(nomor.get(i)), pesan);
+//                msg.setFlashSms(true);
+                Service.getInstance().sendMessage(msg);
+                System.out.println(msg);
+                if (String.valueOf(msg.getMessageStatus()).equals("FAILED")) {
+                    sta = "tidak terkirim";
+                    System.out.println(String.valueOf(nomor.get(i)) + " gagal terkirim");
+                } else if (String.valueOf(msg.getMessageStatus()).equals("SENT")) {
+                    System.out.println(String.valueOf(nomor.get(i)) + " berhasil terkirim");
+                    sta = "terkirim";
+                }
+            } else {
+                OutboundMessage msg = new OutboundMessage(String.valueOf(nomor.get(i)), pesan);
+//                msg.setFlashSms(true);
+                Service.getInstance().sendMessage(msg);
+                System.out.println(msg);
+                if (String.valueOf(msg.getMessageStatus()).equals("FAILED")) {
+                    sta = "tidak terkirim";
+                    System.out.println(String.valueOf(nomor.get(i)) + " gagal terkirim");
+                } else if (String.valueOf(msg.getMessageStatus()).equals("SENT")) {
+                    System.out.println(String.valueOf(nomor.get(i)) + " berhasil terkirim");
+                    sta = "terkirim";
+                }
+            }
+                simpanPesan(String.valueOf(nomor.get(i)), pesan, sta);*/
+            System.out.println("berhasil terkirim "+i);
+        }
+//        Service.getInstance().stopService();
+//        Service.getInstance().removeGateway(gateway);
+    }
     /**
      * @param args the command line arguments
      */
@@ -529,6 +638,7 @@ public class F_NewSendMessage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    public static javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
