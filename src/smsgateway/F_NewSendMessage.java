@@ -5,20 +5,28 @@
  */
 package smsgateway;
 
+import utils.koneksi;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Properties;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Properties;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 import org.smslib.AGateway;
 import org.smslib.IOutboundMessageNotification;
 import org.smslib.OutboundMessage;
+import org.smslib.Service;
+import org.smslib.modem.SerialModemGateway;
 
 /**
  *
@@ -30,14 +38,13 @@ public class F_NewSendMessage extends javax.swing.JFrame {
      * Creates new form F_NewSendMessage
      */
     private koneksi kon;
-    private String notujuan,isipesan;
-    private String kueri;
-    private String stradmin;
     DefaultListModel model = new DefaultListModel();
+    private DefaultTableModel model2;
+    private int selectedRowIndex;
 //    public static int nilai;
-    
+
     private String sta;
-    
+
     public F_NewSendMessage() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -46,10 +53,29 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         txt_isipesan.setText("");
         pnl_broadcast.setVisible(false);
         pnl_darurat.setVisible(false);
-        
+
         kon = new koneksi();
         jList1.setModel(model);
 //        jProgressBar1.setValue(nilai);
+
+        model2 = new DefaultTableModel();
+        tbl_gempa.setModel(model2);
+        model2.addColumn("No");
+        model2.addColumn("Id");
+        model2.addColumn("Kekuatan");
+        model2.addColumn("Kedalaman");
+        model2.addColumn("Lempeng Terangkat");
+        model2.addColumn("Lokasi");
+        model2.addColumn("Jarak");
+        model2.addColumn("Potensi Tsunami");
+        model2.addColumn("Peringatan");
+
+        try {
+            getTabelGempa();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(F_History.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -302,6 +328,11 @@ public class F_NewSendMessage extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_gempa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_gempaMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbl_gempa);
 
         javax.swing.GroupLayout pnl_daruratLayout = new javax.swing.GroupLayout(pnl_darurat);
@@ -404,56 +435,66 @@ public class F_NewSendMessage extends javax.swing.JFrame {
 
     private void btn_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahActionPerformed
         // TODO add your handling code here:
-        if (!txt_notujuan.getText().isEmpty())
+        if (!txt_notujuan.getText().isEmpty()) {
             model.addElement(txt_notujuan.getText());
+        }
     }//GEN-LAST:event_btn_tambahActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
         // TODO add your handling code here:
-        if(jList1.getSelectedIndex()> -1){
+        if (jList1.getSelectedIndex() > -1) {
             model.remove(jList1.getSelectedIndex());
-        }else {
-            JOptionPane.showMessageDialog(null,"sorot nomor terlebih dahulu");
+        } else {
+            JOptionPane.showMessageDialog(null, "sorot nomor terlebih dahulu");
         }
     }//GEN-LAST:event_btn_hapusActionPerformed
 
     private void btn_wargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_wargaActionPerformed
         // TODO add your handling code here:
         kon = new koneksi();
-        try{
+        try {
             addWarga();
-        } catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_btn_wargaActionPerformed
 
     private void btn_kirimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kirimActionPerformed
         // TODO add your handling code here:
+        String txt = "";
         try {
-//            new progress().show();
             SendMessage app = new SendMessage();
-            if (check_broadcast.isSelected()){
-                try {
-                        send(model, txt_isipesan.getText());
-                          
-                } catch (Exception e){
-                    e.printStackTrace();
+            if (check_broadcast.isSelected()) {
+                send(model, txt_isipesan.getText());
+            } else if (check_darurat.isSelected()) {
+                if ((tbl_gempa.getSelectedRow() >= 0)) {
+                    if ((model2.getValueAt(selectedRowIndex, 8).toString().toUpperCase()).equals("BELUM")) {
+                        txt = String.format("Perhatian, telah terjadi gampa berkuatan %s dengan kedalaman %s di %s. Untuk warga daerah sekitar dimohon untuk siaga karena gempa ini berpotensi terjadi tsunami. \nBMKG ",
+                                model2.getValueAt(selectedRowIndex, 2).toString(),
+                                model2.getValueAt(selectedRowIndex, 3).toString(),
+                                model2.getValueAt(selectedRowIndex, 5).toString());
+                        send(model, txt);
+                        updateGempa(model2.getValueAt(selectedRowIndex, 1).toString());
+                        getTabelGempa();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Sudah terkirim");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Sorot record terlebih dahulu");
                 }
-            }else{
-                app.doIt(txt_notujuan.getText(), txt_isipesan.getText());
             }
             //PANGGIL FUNGSI SENDMESSAGE
             new F_Home().show();
             this.dispose();
         } catch (Exception ex) {
-           Logger.getLogger(F_History.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(F_History.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_kirimActionPerformed
 
     private void txt_notujuanKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_notujuanKeyTyped
         // TODO add your handling code here:
         char enter = evt.getKeyChar();
-        if(!(Character.isDigit(enter))){
+        if (!(Character.isDigit(enter))) {
             evt.consume();
         }
     }//GEN-LAST:event_txt_notujuanKeyTyped
@@ -464,38 +505,55 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_kembaliActionPerformed
 
-     public void addWarga() throws ClassNotFoundException {
+    private void tbl_gempaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_gempaMouseClicked
+        // TODO add your handling code here:
+        selectedRowIndex = tbl_gempa.getSelectedRow();
+    }//GEN-LAST:event_tbl_gempaMouseClicked
+
+    public void addWarga() throws ClassNotFoundException {
         try {
-            Statement stasql = (Statement)kon.Connect().createStatement();
+            Statement stasql = (Statement) kon.Connect().createStatement();
             ResultSet runkueri = stasql.executeQuery("select * from warga"); //Database pesan, field no_tujuan dan isi_pesan
             while (runkueri.next()) {
                 model.addElement(runkueri.getString("nomor"));
             }
-        } 
-        catch (SQLException e){
-            JOptionPane.showMessageDialog(null,e.getMessage());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-//    public void simpanPesan() throws ClassNotFoundException {
-//        
-//        notujuan = txt_notujuan.getText(); //VARIABEL UNTUK SENDMESSAGE
-//        isipesan = txt_isipesan.getText(); //VARIABEL UNTUK SENDMESSAGE
-//        
-//        try {
-//            Statement stasql = (Statement)kon.Connect().createStatement();
-//            int runkueri = stasql.executeUpdate("insert into pesan (id_pesan, no_tujuan, isi_pesan) VALUES (NULL, '"+notujuan+"','"+isipesan+"')"); //Database pesan, field no_tujuan dan isi_pesan
-////            JOptionPane.showMessageDialog(null,"Pesan berhasil disimpan");
-//            stasql.close();
-//        } catch (SQLException e){
-//            JOptionPane.showMessageDialog(null,e.getMessage());
-//        }
-//    }
-    
-    public class OutboundNotification implements IOutboundMessageNotification {
 
-        public void process(AGateway gateway, OutboundMessage msg) {
-            System.out.println("Outbound handler called from Gateway: " + gateway.getGatewayId());
-            System.out.println(msg);
+    public void getTabelGempa() throws ClassNotFoundException {
+        try {
+            model2.setRowCount(0);
+            int no = 1;
+            Statement stasql = (Statement) kon.Connect().createStatement();
+            ResultSet runkueri = stasql.executeQuery("select * from gempa"); //Database pesan, field no_tujuan dan isi_pesan
+            while (runkueri.next()) {
+                Object[] obj = new Object[9];
+                obj[0] = no;
+                obj[1] = runkueri.getString("id_gempa");
+                obj[2] = runkueri.getString("kekuatan_gempa") + " SR";
+                obj[3] = runkueri.getString("kedalaman_gempa") + " KM";
+                String lempeng = runkueri.getString("lempeng_terangkat");
+                if (lempeng.equals("0")) {
+                    obj[4] = "Tidak";
+                } else if (lempeng.equals("1")) {
+                    obj[4] = "Ya";
+                }
+                obj[5] = runkueri.getString("lokasi_gempa");
+                obj[6] = runkueri.getString("jarak_gempa") + " KM";
+                String potensi = runkueri.getString("potensi_tsunami");
+                if (potensi.equals("0")) {
+                    obj[7] = "Tidak";
+                } else if (potensi.equals("1")) {
+                    obj[7] = "Ys";
+                }
+                obj[8] = runkueri.getString("pesan_peringatan");
+                model2.addRow(obj);
+                no++;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
@@ -504,6 +562,17 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         try {
             Statement stasql = (Statement) kon.Connect().createStatement();
             int runkueri = stasql.executeUpdate("insert into pesan (id_pesan, no_tujuan, isi_pesan, waktu, status) VALUES (NULL, '" + nomor + "','" + pesan + "', now(),'" + status + "')"); //Database pesan, field no_tujuan dan isi_pesan
+            stasql.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+
+    public void updateGempa(String id) throws ClassNotFoundException {
+        kon = new koneksi();
+        try {
+            Statement stasql = (Statement) kon.Connect().createStatement();
+            int runkueri = stasql.executeUpdate("update gempa set pesan_peringatan = 'Sudah' where id_gempa = " + id);
             stasql.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -532,26 +601,24 @@ public class F_NewSendMessage extends javax.swing.JFrame {
                 }
             }
         }
-//        OutboundNotification outboundNotification = new OutboundNotification();
-//        SerialModemGateway gateway = new SerialModemGateway("", prop.getProperty("comPort", "com9"), Integer.parseInt(prop.getProperty("baudRate", "9600")), "", prop.getProperty("model", "AirCard 312U"));
-//        gateway.setInbound(true);
-//        gateway.setOutbound(true);
-//        Service.getInstance().setOutboundMessageNotification(outboundNotification);
-//        Service.getInstance().addGateway(gateway);
-//        Service.getInstance().startService();
-        
-        
-        for (int i = 0; i < (nomor.getSize()*1000); i++){
-            try {
-                jProgressBar1.setValue(nomor.getSize()/i);
-                jProgressBar1.repaint();
-//                progress.update(nomor.getSize()/i);
-            } catch (Exception e) {
-                jProgressBar1.setValue(0);
-                jProgressBar1.repaint();
-            }
-            /*
-                if (i % 20 == 0) {
+        OutboundNotification outboundNotification = new OutboundNotification();
+        SerialModemGateway gateway = new SerialModemGateway("", prop.getProperty("comPort", "com9"), Integer.parseInt(prop.getProperty("baudRate", "9600")), "", prop.getProperty("model", "AirCard 312U"));
+        gateway.setInbound(true);
+        gateway.setOutbound(true);
+        Service.getInstance().setOutboundMessageNotification(outboundNotification);
+        Service.getInstance().addGateway(gateway);
+        Service.getInstance().startService();
+
+        for (int i = 0; i < (nomor.getSize() * 1000); i++) {
+//            try {
+//                jProgressBar1.setValue(nomor.getSize() / i);
+//                jProgressBar1.repaint();
+////                progress.update(nomor.getSize()/i);
+//            } catch (Exception e) {
+//                jProgressBar1.setValue(0);
+//                jProgressBar1.repaint();
+//            }
+            if (i % 20 == 0) {
                 Service.getInstance().stopService();
                 Service.getInstance().removeGateway(gateway);
                 Service.getInstance().addGateway(gateway);
@@ -580,12 +647,21 @@ public class F_NewSendMessage extends javax.swing.JFrame {
                     sta = "terkirim";
                 }
             }
-                simpanPesan(String.valueOf(nomor.get(i)), pesan, sta);*/
-            System.out.println("berhasil terkirim "+i);
+            simpanPesan(String.valueOf(nomor.get(i)), pesan, sta);
+            System.out.println("berhasil terkirim " + i);
         }
-//        Service.getInstance().stopService();
-//        Service.getInstance().removeGateway(gateway);
+        Service.getInstance().stopService();
+        Service.getInstance().removeGateway(gateway);
     }
+
+    public class OutboundNotification implements IOutboundMessageNotification {
+
+        public void process(AGateway gateway, OutboundMessage msg) {
+            System.out.println("Outbound handler called from Gateway: " + gateway.getGatewayId());
+            System.out.println(msg);
+        }
+    }
+
     /**
      * @param args the command line arguments
      */

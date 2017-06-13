@@ -5,6 +5,7 @@
  */
 package smsgateway;
 
+import utils.koneksi;
 import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;

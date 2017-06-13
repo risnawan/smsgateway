@@ -5,6 +5,7 @@
  */
 package smsgateway;
 
+import utils.koneksi;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,8 +22,8 @@ import javax.swing.text.Document;
  */
 public class F_Registrasi extends javax.swing.JFrame {
     private koneksi kon;
-    private String no_tujuan,isi_pesan;
-    private String kueri;
+//    private String no_tujuan,isi_pesan;
+//    private String kueri;
 //    private String stradmin;
     private DefaultTableModel model;
     int selectedRowIndex;

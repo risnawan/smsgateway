@@ -5,6 +5,7 @@
  */
 package smsgateway;
 
+import utils.koneksi;
 import java.util.Properties;
 import org.smslib.AGateway;
 import org.smslib.IOutboundMessageNotification;

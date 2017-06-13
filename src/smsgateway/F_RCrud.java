@@ -5,6 +5,7 @@
  */
 package smsgateway;
 
+import utils.koneksi;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
