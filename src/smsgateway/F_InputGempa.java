@@ -16,6 +16,8 @@ public class F_InputGempa extends javax.swing.JFrame {
      */
     public F_InputGempa() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 
     /**

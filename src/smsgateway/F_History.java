@@ -34,6 +34,8 @@ public class F_History extends javax.swing.JFrame {
 //        stradmin = namaadmin;
         initComponents();
         kon = new koneksi();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         
         model = new DefaultTableModel ();
         tbl_pesan.setModel(model);

@@ -31,6 +31,8 @@ public class F_NewSendMessage extends javax.swing.JFrame {
     
     public F_NewSendMessage() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         txt_notujuan.setText("");
         txt_isipesan.setText("");
         pnl_broadcast.setVisible(false);
@@ -109,6 +111,11 @@ public class F_NewSendMessage extends javax.swing.JFrame {
         btn_kembali.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         btn_kembali.setForeground(new java.awt.Color(51, 153, 255));
         btn_kembali.setText("Kembali");
+        btn_kembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_kembaliActionPerformed(evt);
+            }
+        });
 
         btn_kirim.setBackground(new java.awt.Color(0, 0, 0));
         btn_kirim.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
@@ -436,6 +443,12 @@ public class F_NewSendMessage extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txt_notujuanKeyTyped
+
+    private void btn_kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kembaliActionPerformed
+        // TODO add your handling code here:
+        new F_Home().show();
+        this.dispose();
+    }//GEN-LAST:event_btn_kembaliActionPerformed
 
      public void addWarga() throws ClassNotFoundException {
         try {

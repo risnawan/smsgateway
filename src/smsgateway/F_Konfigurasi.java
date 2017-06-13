@@ -24,6 +24,8 @@ public class F_Konfigurasi extends javax.swing.JFrame {
      */
     public F_Konfigurasi() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 
     /**

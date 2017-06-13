@@ -32,6 +32,8 @@ public class F_Registrasi extends javax.swing.JFrame {
      */
     public F_Registrasi() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         kon = new koneksi();
         btn_ubah.setVisible(false);
         model = new DefaultTableModel ();

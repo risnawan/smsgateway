@@ -25,6 +25,8 @@ public class F_RCrud extends javax.swing.JFrame {
     
     public F_RCrud() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 
     /**

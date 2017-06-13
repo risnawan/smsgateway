@@ -33,7 +33,9 @@ public class F_Login extends javax.swing.JFrame {
     
     public F_Login() {
         initComponents();
-        kon = new koneksi();        
+        kon = new koneksi();  
+        this.setLocationRelativeTo(null);
+//        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 
     /**
