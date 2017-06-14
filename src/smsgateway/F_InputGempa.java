@@ -5,6 +5,11 @@
  */
 package smsgateway;
 
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import utils.koneksi;
+
 /**
  *
  * @author User
@@ -14,6 +19,9 @@ public class F_InputGempa extends javax.swing.JFrame {
     /**
      * Creates new form F_InputGempa
      */
+    private koneksi kon;
+    
+    
     public F_InputGempa() {
         initComponents();
     }
@@ -89,18 +97,23 @@ public class F_InputGempa extends javax.swing.JFrame {
         jLabel4.setText("Lempeng Bumi Terangkat");
 
         txt_kekuatan.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        txt_kekuatan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_kekuatanKeyTyped(evt);
+            }
+        });
 
         txt_kedalaman.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        txt_kedalaman.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_kedalamanKeyTyped(evt);
+            }
+        });
 
         btngrp_lempeng.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         jRadioButton1.setForeground(new java.awt.Color(51, 153, 255));
         jRadioButton1.setText("Ya");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
 
         btngrp_lempeng.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
@@ -156,6 +169,11 @@ public class F_InputGempa extends javax.swing.JFrame {
         jLabel8.setText("Jarak Gempa");
 
         txt_jarak.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        txt_jarak.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_jarakKeyTyped(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 153, 255));
@@ -243,16 +261,71 @@ public class F_InputGempa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
         // TODO add your handling code here:
+        try{
+            String lempeng = "";
+            if(jRadioButton1.isSelected()) lempeng = "1";
+            else if (jRadioButton2.isSelected()) lempeng = "0";
+            simpan(txt_kekuatan.getText(), txt_kedalaman.getText(), lempeng, txt_lokasi.getText(), txt_jarak.getText());
+            JOptionPane.showMessageDialog(null,"Data berhasil masuk");
+        } catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+        
+        this.dispose();
         
         //Simpan ke Database Gempa
     }//GEN-LAST:event_btn_simpanActionPerformed
 
+    private void txt_kekuatanKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_kekuatanKeyTyped
+        // TODO add your handling code here:
+        char enter = evt.getKeyChar();
+        if (!(Character.isDigit(enter))) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_kekuatanKeyTyped
+
+    private void txt_kedalamanKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_kedalamanKeyTyped
+        // TODO add your handling code here:
+        char enter = evt.getKeyChar();
+        if (!(Character.isDigit(enter))) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_kedalamanKeyTyped
+
+    private void txt_jarakKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_jarakKeyTyped
+        // TODO add your handling code here:
+        char enter = evt.getKeyChar();
+        if (!(Character.isDigit(enter))) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_jarakKeyTyped
+
+    public void simpan(String kekuatan, String kedalaman, String lempeng, String lokasi, String jarak) throws ClassNotFoundException {
+        kon = new koneksi();        
+        String potensi = "";
+        if((Integer.parseInt(kekuatan) > 6) && (lempeng.equals("1")) && (Integer.parseInt(kedalaman) > 40) ){
+            potensi = "1";
+        }else {
+            potensi = "0";
+        }
+        try {
+            Statement stasql = (Statement)kon.Connect().createStatement();
+            String str = String.format("INSERT INTO `gempa` (`kekuatan_gempa`, `kedalaman_gempa`, `lempeng_terangkat`, `lokasi_gempa`, `jarak_gempa`, `potensi_tsunami`, `pesan_peringatan`) VALUES (%s, %s, %s, '%s', %s, %s, 'Belum')", 
+                    kekuatan, 
+                    kedalaman,
+                    lempeng,
+                    lokasi, 
+                    jarak,
+                    potensi);
+            int runkueri = stasql.executeUpdate(str);
+            stasql.close();
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
