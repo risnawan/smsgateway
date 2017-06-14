@@ -33,51 +33,8 @@ public class lokasi {
        final Browser browser = new Browser();
        BrowserView browserView = new BrowserView(browser);
 
-       JButton zoomInButton = new JButton("Zoom In");
-       zoomInButton.addActionListener(new ActionListener() {
-           public void actionPerformed(ActionEvent e) {
-               if (zoomValue < MAX_ZOOM) {
-                   browser.executeJavaScript("map.setZoom(" + ++zoomValue + ")");
-               }
-           }
-       });
-
-       JButton zoomOutButton = new JButton("Zoom Out");
-       zoomOutButton.addActionListener(new ActionListener() {
-           public void actionPerformed(ActionEvent e) {
-               if (zoomValue > MIN_ZOOM) {
-                   browser.executeJavaScript("map.setZoom(" + --zoomValue + ")");
-               }
-           }
-       });
-/*
-       JButton setMarkerButton = new JButton("Set Marker");
-       setMarkerButton.addActionListener(new ActionListener() {
-           public void actionPerformed(ActionEvent e) {
-               browser.executeJavaScript("var myLatlng = new google.maps.LatLng(-6.275570, 106.812719);\n" +
-                       "var marker = new google.maps.Marker({\n" +
-                       "    position: myLatlng,\n" +
-                       "    map: map,\n" +
-                       "    title: 'Hello World!'\n" +
-                       "});");
-           }
-       });*/
-
-       JButton setMarkerButton = new JButton("Tutup");
-       setMarkerButton.addActionListener(new ActionListener() {
-           public void actionPerformed(ActionEvent e) {
-               
-           }
-       });
-
-       JPanel toolBar = new JPanel();
-       toolBar.add(zoomInButton);
-       toolBar.add(zoomOutButton);
-       toolBar.add(setMarkerButton);
-
        JFrame frame = new JFrame("map.html");
        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-       frame.add(toolBar, BorderLayout.SOUTH);
        frame.add(browserView, BorderLayout.CENTER);
        frame.setSize(900, 500);
        frame.setLocationRelativeTo(null);
