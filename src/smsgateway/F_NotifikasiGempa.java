@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
@@ -32,6 +33,7 @@ public class F_NotifikasiGempa extends javax.swing.JFrame {
         initComponents();
         kon = new koneksi();
         this.setLocationRelativeTo(null);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         
         model = new DefaultTableModel ();

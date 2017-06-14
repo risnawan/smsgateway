@@ -26,6 +26,7 @@ public class F_RCrud extends javax.swing.JFrame {
     
     public F_RCrud() {
         initComponents();
+        kon = new koneksi();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
@@ -217,9 +218,13 @@ public class F_RCrud extends javax.swing.JFrame {
     private void btn_simpan6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpan6ActionPerformed
         // TODO add your handling code here:
         try{
-            simpan(txt_nama.getText(), txt_hp.getText(), txt_alamat.getText());
+            if(!opsi.equals("edit")){
+                simpan(txt_nama.getText(), txt_hp.getText(), txt_alamat.getText());    
+            }else{
+                update(txt_nama.getText(), txt_alamat.getText(), txt_hp.getText());
+            }
             JOptionPane.showMessageDialog(null, "Berhasil");
-            new F_RCrud().show();
+            new F_Registrasi().show();
             this.dispose();
         }catch(ClassNotFoundException es){
             JOptionPane.showMessageDialog(null, "gagal");
@@ -232,7 +237,7 @@ public class F_RCrud extends javax.swing.JFrame {
             try{
                 Tampilkan();
             }catch(Exception e){
-                JOptionPane.showMessageDialog(null, e);
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         }
     }//GEN-LAST:event_formWindowOpened
@@ -258,8 +263,20 @@ public class F_RCrud extends javax.swing.JFrame {
                 txt_alamat.setText(runkueri.getString("alamat"));
             }
         } 
-        catch (SQLException e){
+        catch (Exception e){
             JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+    }
+    
+    public void update(String nama, String alamat, String nomor) throws ClassNotFoundException{
+        try {
+            Statement stasql = (Statement) kon.Connect().createStatement();
+            String txt = String.format("update warga set nama = '%s', alamat = '%s', nomor = '%s' where id = %s", 
+                    nama, alamat, nomor, id);
+            int runkueri = stasql.executeUpdate(txt);
+            stasql.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
     /**
