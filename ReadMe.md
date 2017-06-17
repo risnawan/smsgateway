@@ -5,6 +5,7 @@ Dalam memenuhi tugas mata kuliah Pemrograman Jaringan, kami berkolaborasi membua
   - MySQL JDBC Driver
   - smslib-3.5.3
   - log4j-1.2.16
+  - jxbrowser untuk google maps
 
 # Konfigurasi SMSLib :
 terdapat 3 file dalam folder konfig 
@@ -41,6 +42,10 @@ Langkat 3: Copy javax.comm.properties to
 > Arahkan System Environment JAVA_HOME pada path dimana jdk telah terinstal.
 
 > Gunakan jdk x86.
+
+# Konfigurasi jxbrowser
+untuk download file jar nya dan cara konfigurasi nya, silahkan klik [link ini](https://jxbrowser.support.teamdev.com/support/solutions/articles/9000012864-quick-start-guide-for-swing-developer)
+
 
 
 ### Kelas 4IA01 Kelompok N :
