@@ -116,11 +116,13 @@ public class F_InputGempa extends javax.swing.JFrame {
             }
         });
 
+        jRadioButton1.setBackground(new java.awt.Color(0, 51, 51));
         btngrp_lempeng.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         jRadioButton1.setForeground(new java.awt.Color(51, 153, 255));
         jRadioButton1.setText("Ya");
 
+        jRadioButton2.setBackground(new java.awt.Color(0, 51, 51));
         btngrp_lempeng.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         jRadioButton2.setForeground(new java.awt.Color(51, 153, 255));
